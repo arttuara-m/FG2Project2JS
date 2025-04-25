@@ -1,0 +1,19 @@
+header {
+    max-width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+#main {
+    max-width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+#maingroup {
+    display: flex;
+}
+.buttonrow {
+    padding: 10px;
+}
+li {
+    list-style-type: none;
+}
