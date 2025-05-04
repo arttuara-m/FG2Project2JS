@@ -2,8 +2,10 @@ import CAFG_variables as gv  # Import Global Variables
 import CAFG_items
 import random
 import CAFG_events
-import mysql.connector
+# import mysql.connector
 import math
+
+from CAFG_variables import shop_items
 
 """
 conn = mysql.connector.connect(
@@ -350,74 +352,62 @@ def actionusesub(used_item):
             CAFG_items.snow_globe.activate()
             return
 
-'''
+
 # buys more items
 def actionbuy():
     text = ""
     list_of_item_names = []
 
     if len(gv.shop_items) == 0:
-        print("You bought all the items. You lament that your shopping time has ended.")
+        text = "You bought all the items. You lament that your shopping time has ended."
+    else:
+        text = "What do you want to buy"
+        for i, item in enumerate(gv.shop_items):
+            list_of_item_names.append(item.name)
+    return [text, list_of_item_names]
 
+
+# ^^^above the part we need for the print
+
+
+def buythis(itemtobuy):
+    shop_item_number = 0
+    print(shop_item_number)
     for i, item in enumerate(gv.shop_items):
-        print(f"{i + 1} {item.name}: {item.price}€")
-        list_of_item_names.append(item.name)
-        print()
+        print(i)
+        print(item.name)
+        if item.name == itemtobuy:
+            shop_item_number = i
+    print(itemtobuy)
+    print(shop_item_number)
 
-        # checks for valid input
-        shop_item_number = input("What item do you want to buy (N to go back): ")
-        if shop_item_number == "N":
-            continue_using = False
-        elif not shop_item_number.isdigit():
-            print("Wrong input")
-        elif (0 >= int(shop_item_number)) or (
-                len(list_of_item_names) < int(shop_item_number)
-        ):
-            print(shop_item_number)
-        print("Wrong input")
-        else:
-        print(shop_item_number)
-        if gv.shop_items[int(shop_item_number) - 1].price > gv.player_money:
-            print("The item is too expensive")
-        print()
+    if gv.shop_items[shop_item_number].price > gv.player_money:
+        return "The item is too expensive"
 
-        # buys the item and places it in player_items while also removing it from the shop
-        else:
-        bought_item = gv.shop_items[int(shop_item_number) - 1]
-        if bought_item == CAFG_items.tonnin_seteli:
-            gv.player_money -= 996
+    # buys the item and places it in player_items while also removing it from the shop
+    else:
+        bought_item = gv.shop_items[shop_item_number]
         gv.player_items.append(bought_item)
-        gv.player_money -= gv.shop_items[int(shop_item_number) - 1].price
-        timehandler(
-            1, gv.shop_items[int(shop_item_number) - 1].price
-        )  # uses 1 unit of time and increases local threat by 10 with said amount of time.
-        gv.shop_items.pop(int(shop_item_number) - 1)
-        print()
-        print(f"You bought {bought_item.name}")
-        print(bought_item.buy)
-        print()
-        print(f"Your balance: {gv.player_money}")
-        print()
-'''
+        gv.player_money -= gv.shop_items[shop_item_number].price
+        #timehandler(
+        #    1, gv.shop_items[shop_item_number].price
+        #)  # uses 1 unit of time and increases local threat by 10 with said amount of time.
+        #gv.shop_items.pop(shop_item_number)
+        return [f"You bought {itemtobuy}!"]
+
+    #^^^^^work in progress^^^^^^
 
 # checks your items
 def actioncheck():
     if len(gv.player_items) == 0:
-        print("You have no items. Go buy some")
+        return "You have no items. Go buy some"
     else:
-        # prints player_items
-        print("Your items:")
-        print(
-            "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
-        )
+        items = ""
         for item in gv.player_items:
-            print(
-                f"{item.name}\n"
-                f"{item.desc}\n"
-                f"___________________________________________________________________________"
-            )
-        print()
+            items+=f"{item.name}\n{item.desc}\n\n"
+        return items
 
+    #^^^^^ should work ^^^^^
 
 # allows you to do work
 def actionwork():

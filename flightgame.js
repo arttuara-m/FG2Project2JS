@@ -10,7 +10,12 @@ async function statupdater() {
   document.querySelector('#showlthreat').innerText = 'Local threat: ' + data[4];
 }
 
-const commands = ['info', 'use', 'buy', 'work', 'status'];
+async function turnrefresher() {
+  const response = await fetch(`http://127.0.0.1:3000/turnupdate`);
+  console.log(await response.text())
+}
+
+const commands = ['info', 'check', 'use', 'buy', 'work', 'status'];
 //Creates the first button row
 for (const bcommand of commands) {
   //Creating the button
@@ -23,11 +28,18 @@ for (const bcommand of commands) {
     const data = await response.json();
     document.querySelector('#textbox').innerText = data[0]; //the text content is in the index 0
     document.querySelector('#buttonrow2').innerHTML = ""
+    statupdater();
     if (data.length === 2) { //the program checks if additional data was returned
       for (const item of data[1]) {
         const choicebutton = document.createElement('button');
         choicebutton.innerText = item;
         choicebutton.setAttribute('id', item);
+        choicebutton.addEventListener('click', async function(){
+          console.log(this.id)
+          const response2 = await fetch(`http://127.0.0.1:3000/${bcommand}item/${this.id}`)
+          document.querySelector('#textbox').innerText = await response2.json()
+          statupdater();
+        })
         document.querySelector('#buttonrow2').appendChild(choicebutton)
       }
     }
@@ -36,4 +48,5 @@ for (const bcommand of commands) {
   document.querySelector('#buttonrow1').appendChild(infobutton);
 }
 
+turnrefresher();
 statupdater();
