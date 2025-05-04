@@ -399,9 +399,8 @@ def actionbuy():
         print(f"Your balance: {gv.player_money}")
         print()
 '''
-        # checks your items
 
-
+# checks your items
 def actioncheck():
     if len(gv.player_items) == 0:
         print("You have no items. Go buy some")
