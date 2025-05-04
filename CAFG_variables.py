@@ -13,8 +13,6 @@ local_threat = {current_country: 0}
 # VV part of the movementhandler placeholder VV
 global_country_index = 0
 
-global_country_index = 0
-
 
 def update_current_country(new_country):
     global current_country
