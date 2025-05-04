@@ -30,7 +30,8 @@ def check():
 @app.route('/status')
 def status():
     return [str(gloVar.current_score), str(gloVar.player_money),
-            str(gloVar.current_country), str(gloVar.global_threat),
+            str(gloVar.time_units), str(gloVar.current_country),
+            str(gloVar.global_threat),
             str(gloVar.local_threat[gloVar.current_country])]
 
 @app.route('/turnupdate')

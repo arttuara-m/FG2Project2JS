@@ -5,9 +5,10 @@ async function statupdater() {
   const data = await response.json();
   document.querySelector('#showscore').innerText = 'Score: ' + data[0];
   document.querySelector('#showmoney').innerText = 'Money: ' + data[1];
-  document.querySelector('#showcountry').innerText = 'Country: ' + data[2];
-  document.querySelector('#showgthreat').innerText = 'Global threat: '+data[3];
-  document.querySelector('#showlthreat').innerText = 'Local threat: ' + data[4];
+  document.querySelector('#showtimeunits').innerText = 'Timeunits: ' + data[2];
+  document.querySelector('#showcountry').innerText = 'Country: ' + data[3];
+  document.querySelector('#showgthreat').innerText = 'Global threat: '+data[4];
+  document.querySelector('#showlthreat').innerText = 'Local threat: ' + data[5];
 }
 
 async function turnrefresher() {

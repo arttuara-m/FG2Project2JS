@@ -194,12 +194,13 @@ def actionhandlersub(command):
 
 # list of actions that the player can perform
 def listcommands():
-    return (f"{'use'} ---  use your items\n "
+    return (f"{'check'} ---  check your items\n "
+            f"{'use'} ---  use your items\n "
             f"{'buy'} ---  buy more items\n "
             f"{'work'} ---  work for money\n"
             f"{'chill'} ---  just take it easy\n"
             f"{'leave'} ---  go to the next airport\n"
-            f"{'info'} ---  check your commands")
+            f"{'status'} ---  check your commands")
 
 
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -404,7 +405,7 @@ def actioncheck():
     else:
         items = ""
         for item in gv.player_items:
-            items+=f"{item.name}\n{item.desc}\n\n"
+            items = f"{item.name}\n{item.desc}\n\n" + items
         return items
 
     #^^^^^ should work ^^^^^
