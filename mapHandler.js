@@ -1,6 +1,11 @@
 // Initialize the map and set its view to Helsinki
+let jsHTMLtest = document.getElementById("showcountry").innerText
+console.log(jsHTMLtest)
 let coords = [60.1699, 24.9384]
-const map = L.map("map").setView(coords, 13);
+const map = L.map("map", {
+    minZoom: 0,
+    maxZoom: 0
+}).setView(coords, 13);
 
 // Add the OpenStreetMap tile layer
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
