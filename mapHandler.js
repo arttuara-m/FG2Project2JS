@@ -1,5 +1,6 @@
 let coords = [0,0]
-
+const airportMarkers = []
+let newAirport = ""
 //Add a player marker and create map
 var map = L.map("map", {zoomControl: false}).setView(coords, 13),
     playerMarker = L.marker(map.getCenter()).addTo(map)
@@ -30,16 +31,24 @@ function updateCoords(latLong){
 }
 
 function addAirportMarkers(data){
+    //first slot is reserved to the message so check if it has brought back other data
     if (data.length <= 2){
+        //remove previous map markers
+        for(let i = 0; i < airportMarkers.length; i++) {
+            console.log("Removing "+newAirport[i])
+            map.removeLayer(airportMarkers[i]);
+        }
+        //remove the text at start and make a new array from that.
         for (const item of data[1]) {
-            airportCoords = [ parseFloat(item[2]) ,parseFloat(item[3])]
+            airportCoords = [ parseFloat(item[2]) ,parseFloat(item[3]), item[0]+' '+item[1]]
             console.log('addAirportMarker: data recieved for '+item[0]+
                 '\n at coordinates: '+airportCoords)
+            //adding markers
             const newAirport = L.marker(airportCoords)
                 .addTo(map).bindPopup(item[0]+' - '+item[1]);
+            airportMarkers.push(newAirport);
         }}
 }
-
 //################   vvvvvvv   mitä tekee hän? vvvvv   ################
 //let jsHTMLtest = document.getElementById("showcountry").innerText
 //console.log(jsHTMLtest)

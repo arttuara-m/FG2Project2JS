@@ -502,7 +502,7 @@ def haversine(lat1, lon1, lat2, lon2):
     return r * c  # Distance in km
 
 def nearbyairports(travel_range):
-    text=str("Select an airport from the map.")
+    text=str("Select an airport from the map or one of the buttons from the side.")
     if not conn.is_connected():
         conn.reconnect()
 

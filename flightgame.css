@@ -87,39 +87,34 @@ button:hover {
 }
 
 #main {
-  max-width: 70vw;
-  min-width: 70vw;
-  margin: auto;
+    max-width: 70vw;
+    min-width: 70vw;
+    margin: auto;
 }
 
 #maingroup {
-  display: flex;
+    display: flex;
 }
 
 .buttonrow {
-  padding: 0.5em;
+    padding: 0.5em;
 }
 
 li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 #map {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
+    height: 100vh;
+}
+
+#map {
+    height: 60vh;
+    width: 60vw;
 }
 
 #resetbutton {
-  background-color: #e53935;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-#resetbutton:hover {
-  background-color: #c62828;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
