@@ -53,7 +53,7 @@ invis_cape.use_time = 1
 invis_cape.active = True
 #[local threat]/2 when used
 def invis(self):
-    gv.local_threat[gv.current_airport] = gv.local_threat[gv.current_airport] // 2
+    gv.local_threat[gv.current_country] = gv.local_threat[gv.current_country] // 2
     print("The cape made you harder to track! (Decreased local threat by 50%)")
 invis_cape.activate = invis.__get__(invis_cape,Item)
 
@@ -73,7 +73,7 @@ lottery_fake.type = True
 #Gives 1000-3000€, threat up by 3 000 no matter the outcome.
 def lotteryfake(self):
     money = random.randint(1000, 3000)
-    gv.local_threat[gv.current_airport] += 3000 - (gv.player_luck // 100)
+    gv.local_threat[gv.current_country] += 3000 - (gv.player_luck // 100)
     print(f"You manage to get {money}€, but now you are in trouble!")
     gv.player_money += money
 lottery_fake.activate = lotteryfake.__get__(lottery_fake,Item)
@@ -331,7 +331,7 @@ def checkstability():
             return die
         else:
             print("The warhead falls silent again...")
-    gv.local_threat[gv.current_airport] = 0
+    gv.local_threat[gv.current_country] = 0
     gv.global_threat -= int(gv.global_threat * 0.05)
 warhead.activate = checkstability.__get__(warhead,Item)
 

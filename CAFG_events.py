@@ -53,7 +53,7 @@ def terror(self):
                 print("You load your gun and  the terrorists. The locals see you as a hero!\n"
                       "(Local threaet set to 0)")
                 gv.player_items.pop(gv.player_items.index(CAFG_items.gun_mag))
-                gv.local_threat[gv.current_airport] = 0
+                gv.local_threat[gv.current_country] = 0
                 active = False
             elif CAFG_items.firearm in gv.player_items:
                 print("You dont have ammo!")
@@ -74,7 +74,7 @@ def terror(self):
                     print("You tell the terrorists that .")
             print("You managed to de-escalate the sitsuation! The locals see you as a hero!\n"
                   "(Local threat set to 0)")
-            gv.local_threat[gv.current_airport] = 0
+            gv.local_threat[gv.current_country] = 0
             active = False
         else:
             tries -= 1

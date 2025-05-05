@@ -30,9 +30,9 @@ def check():
 @app.route('/status')
 def status():
     return [str(gloVar.current_score), str(gloVar.player_money),
-            str(gloVar.time_units), str(gloVar.current_airport),
+            str(gloVar.time_units), str(gloVar.current_country),
             str(gloVar.global_threat),
-            str(gloVar.local_threat[gloVar.current_airport])]
+            str(gloVar.local_threat[gloVar.current_country])]
 
 @app.route('/turnupdate')
 def turnupdate():
@@ -50,8 +50,8 @@ def resetgame():
     gloVar.player_luck = 0
     gloVar.player_items = []
     gloVar.previous_travel_distance = 0
-    gloVar.current_airport = "AGGH"
-    gloVar.local_threat = {gloVar.current_airport: 0}
+    gloVar.current_country = "AGGH"
+    gloVar.local_threat = {gloVar.current_country: 0}
     gloVar.global_country_index = 0
 
 if __name__ == '__main__':

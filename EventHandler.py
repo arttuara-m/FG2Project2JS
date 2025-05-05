@@ -43,22 +43,22 @@ def turnhandler():
 
 def globalthreathandler():
     gv.global_threat += gv.previous_travel_distance + (
-            gv.local_threat[gv.current_airport] // 2
+            gv.local_threat[gv.current_country] // 2
     )
     return
 
 
 def localthreathandler(timespent, threat):
     if not gv.local_threat.get(
-            gv.current_airport
+            gv.current_country
     ):  # Checks if country has an assigned gv.local_threat in [dict] yet. If not, adds one.
         if len(gv.local_threat.keys()) == 0:
-            gv.local_threat.update({gv.current_airport: 0})
-        gv.local_threat.update({gv.current_airport: 0})
+            gv.local_threat.update({gv.current_country: 0})
+        gv.local_threat.update({gv.current_country: 0})
 
     gv.local_threat.update(
         {
-            gv.current_airport: gv.local_threat.get(gv.current_airport)
+            gv.current_country: gv.local_threat.get(gv.current_country)
                                 + (threat * timespent)
         }
     )  # Increase gv.local_threat for current country.
@@ -72,7 +72,7 @@ def timehandler(timespent, threat):
 # handles the arrival events
 def eventhandler(luck):
     # vv THESE MULTIPLIERS ARE PLACEHOLDERS vv
-    event_luck = (gv.local_threat.get(gv.current_airport) * 1) * (
+    event_luck = (gv.local_threat.get(gv.current_country) * 1) * (
             gv.global_threat * 1
     ) - (luck * 1)
     eventhandlersub(event_luck)
@@ -101,7 +101,7 @@ def eventhandlersub(event_luck):
             print(
                 "It's the anniversary of the airport! People are celebrating without a care in the world."
             )
-            gv.local_threat[gv.current_airport] -= 5  # drops gv.local_threat by 5 units
+            gv.local_threat[gv.current_country] -= 5  # drops gv.local_threat by 5 units
             return
         case 5:
             event = random.randint(0, len(CAFG_events.used_events) - 1)
@@ -265,8 +265,8 @@ def checkstats():
     print("Game status")
     print(f"Score is {gv.current_score}")
     print(f"Global threat is {gv.global_threat}")
-    print(f"Current country is {gv.current_airport}")
-    print(f"Local treat is {gv.local_threat.get(gv.current_airport)}")
+    print(f"Current country is {gv.current_country}")
+    print(f"Local treat is {gv.local_threat.get(gv.current_country)}")
     print()
 
     print("Your status")
