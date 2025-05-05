@@ -1,40 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-    <link rel="stylesheet" href="flightgame.css">
+    <link rel="stylesheet" href="flightgame.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <script src="flightgame.js" defer></script>
-</head>
-<body>
-<header>
-    <h1>Alien tourism simulator</h1>
-</header>
-<main id="main">
-    <div id="maingroup">
+  </head>
+  <body>
+    <header>
+      <h1>Alien tourism simulator</h1>
+    </header>
+    <main id="main">
+      <div id="maingroup">
         <article id="picandbuttons">
-            <img src="https://placehold.co/500x300" alt="placeholda">
-            <div class="buttonrow" id="buttonrow1">
-                <!--The command buttons go here-->
-            </div>
-            <div class="buttonrow" id="buttonrow2">
-                <button type="button">placeholder</button>
-            </div>
+          <div id="map"></div>
+          <div class="buttonrow" id="buttonrow1">
+            <!--The command buttons go here-->
+          </div>
+          <div class="buttonrow" id="buttonrow2">
+            <button type="button">placeholder</button>
+          </div>
         </article>
         <aside id="sidebar">
-            <ul>
-                <li id="showscore">Score:</li>
-                <li id="showmoney">Money:</li>
-                <li id="showtimeunits">Timeunits:</li>
-                <li id="showcountry">Country:</li>
-                <li id="showgthreat">Global threat:</li>
-                <li id="showlthreat">Local threat:</li>
-            </ul>
+          <ul>
+            <li id="showscore">Score:</li>
+            <li id="showmoney">Money:</li>
+            <li id="showtimeunits">Timeunits:</li>
+            <li id="showcountry">Country:</li>
+            <li id="showgthreat">Global threat:</li>
+            <li id="showlthreat">Local threat:</li>
+          </ul>
         </aside>
-    </div>
-    <p id="textbox">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aut cumque, dolor enim error
-        fugit id ipsum iste necessitatibus nobis obcaecati perferendis possimus provident repellat sed sit suscipit
-        veritatis voluptatem!</p>
-</main>
-</body>
+      </div>
+      <p id="textbox">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aut
+        cumque, dolor enim error fugit id ipsum iste necessitatibus nobis
+        obcaecati perferendis possimus provident repellat sed sit suscipit
+        veritatis voluptatem!
+      </p>
+    </main>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="mapHandler.js"></script>
+  </body>
 </html>
+
