@@ -6,7 +6,7 @@ async function statupdater() {
   document.querySelector('#showscore').innerText = 'Score: ' + data[0];
   document.querySelector('#showmoney').innerText = 'Money: ' + data[1];
   document.querySelector('#showtimeunits').innerText = 'Timeunits: ' + data[2];
-  document.querySelector('#showcountry').innerText = 'Country: ' + data[3];
+  document.querySelector('#showairport').innerText = 'Country: ' + data[3];
   document.querySelector('#showgthreat').innerText = 'Global threat: '+data[4];
   document.querySelector('#showlthreat').innerText = 'Local threat: ' + data[5];
 }
@@ -48,6 +48,15 @@ for (const bcommand of commands) {
   //Adding the button to the first buttonrow
   document.querySelector('#buttonrow1').appendChild(infobutton);
 }
+
+const resetbutton = document.querySelector('#resetbutton')
+resetbutton.addEventListener('click', async function(){
+  const response = await fetch(`http://127.0.0.1:3000/resetgame`)
+  console.log(await response.text())
+  turnrefresher();
+  statupdater();
+  location.reload()
+})
 
 turnrefresher();
 statupdater();
