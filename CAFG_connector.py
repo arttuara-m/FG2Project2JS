@@ -1,10 +1,19 @@
-
+import mysql.connector
 from flask_cors import CORS
 from flask import Flask, request
 
 import EventHandler
 import CAFG_variables as gloVar
 from EventHandler import actioncheck
+
+conn = mysql.connector.connect(
+    host="localhost",
+    user="surviver",
+    password="123",
+    database="flight_game",
+    charset="latin1",
+    collation="latin1_swedish_ci",
+)
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -53,6 +62,20 @@ def resetgame():
     gloVar.current_country = "AGGH"
     gloVar.local_threat = {gloVar.current_country: 0}
     gloVar.global_country_index = 0
+
+@app.route('/updatemap')
+def updatemap():
+    if not conn.is_connected():
+        conn.reconnect()
+
+    cursor = conn.cursor()
+    cursor.execute(""
+                   "SELECT latitude_deg FROM airport WHERE gps_code = 'AGGH';")
+    player_y = cursor.fetchall()
+    cursor.execute(""
+                   "SELECT longitude_deg FROM airport WHERE gps_code = 'AGGH';")
+    player_x = cursor.fetchall()
+    return [float(player_x),float(player_y)]
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=3000)

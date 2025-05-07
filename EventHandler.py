@@ -7,7 +7,7 @@ import math
 
 from CAFG_variables import shop_items
 
-"""
+
 conn = mysql.connector.connect(
     host="localhost",
     user="surviver",
@@ -16,7 +16,7 @@ conn = mysql.connector.connect(
     charset="latin1",
     collation="latin1_swedish_ci",
 )
-"""
+
 
 
 # handlers that perform the basic functions
@@ -561,7 +561,7 @@ def haversine(lat1, lon1, lat2, lon2):
     return R * c  # Distance in km
 
 
-'''
+
 def movementhandler():
     if not conn.is_connected():
         conn.reconnect()
@@ -606,7 +606,7 @@ def movementhandler():
     for port in nearby_airports:
         distance = haversine(current_lat, current_lon, port[3], port[4])
         print(f"{port[0]} ({port[1]}): {port[2]} - {distance:.2f} km away")
-
+'''
     # Choose destination
     dest_choice = None
     while dest_choice not in [str(port[0]) for port in nearby_airports]:
@@ -650,10 +650,9 @@ def movementhandler():
     gv.previous_travel_distance = haversine(
         current_lat, current_lon, chosen_airport[3], chosen_airport[4]
     )
-    # you are dead
 '''
 
-
+# you are dead
 def deathhandler():
     print()
     print("You are dead")
