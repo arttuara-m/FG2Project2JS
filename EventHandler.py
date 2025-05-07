@@ -496,10 +496,6 @@ def haversine(lat1, lon1, lat2, lon2):
 #def movementhandler():
 
 
-
-# Set travel range (change this value to fit your game mechanics)
-travel_range_km = 3000  # Example range
-
 def nearbyairports(travel_range):
     conn = mysqlconnector()
     if not conn.is_connected():
@@ -519,8 +515,8 @@ def nearbyairports(travel_range):
     )
 
     if not current_airport:
-        print("Error: Your current airport could not be found in the database.")
-        return
+        text = "Error: Player current_airport could not be found in the database."
+        return [text]
 
     current_lat, current_lon = current_airport[3], current_airport[4]
 
@@ -535,13 +531,16 @@ def nearbyairports(travel_range):
     ]
 
     if not nearby_airports:
-        print("No airports within range. You may need a longer-range aircraft.")
-        return
+        text = "No airports within range. You may need a longer-range aircraft."
+        return [text]
+    return [nearby_airports]
+
 
     print("\nNearby airports within range:")
     for port in nearby_airports:
         distance = haversine(current_lat, current_lon, port[3], port[4])
         print(f"{port[0]} ({port[1]}): {port[2]} - {distance:.2f} km away")
+
 
 
     # Choose destination

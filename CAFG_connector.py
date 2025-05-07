@@ -4,7 +4,7 @@ from flask import Flask, request
 
 import EventHandler
 import CAFG_variables as gloVar
-from EventHandler import actioncheck
+from EventHandler import actioncheck, nearbyairports
 
 """
 conn = mysql.connector.connect(
@@ -105,10 +105,11 @@ def updatemap():
     player_x = cursor.fetchall()
     return [float(player_x),float(player_y)]
 
-@app.route('/availableairports')
+@app.route('/move')
 def availableairports():
+    nearby_airports= nearbyairports(gloVar.travel_range_km)
     return [
-
+        nearby_airports
     ]
 
 if __name__ == '__main__':

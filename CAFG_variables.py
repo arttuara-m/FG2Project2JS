@@ -13,6 +13,7 @@ local_threat = {current_airport: 0}
 # VV part of the movementhandler placeholder VV
 global_country_index = 0
 
+travel_range_km = 3000  # Replace with aircraft's travel range later.
 
 def update_current_country(new_country):
     global current_airport

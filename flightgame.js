@@ -19,10 +19,12 @@ async function turnrefresher() {
 const commands = ['info', 'check', 'use', 'buy', 'work', 'move'];
 //Creates the first button row
 for (const bcommand of commands) {
+
   //Creating the button
   const infobutton = document.createElement('button');
   infobutton.innerText = bcommand;
   infobutton.setAttribute('id', bcommand);
+
   //Adding async function to the button
   infobutton.addEventListener('click', async function() {
     const response = await fetch(`http://127.0.0.1:3000/${bcommand}`);
@@ -30,6 +32,7 @@ for (const bcommand of commands) {
     document.querySelector('#textbox').innerText = data[0]; //the text content is in the index 0
     document.querySelector('#buttonrow2').innerHTML = ""
     statupdater();
+
     if (data.length === 2) { //the program checks if additional data was returned
       for (const item of data[1]) {
         const choicebutton = document.createElement('button');
