@@ -16,7 +16,7 @@ async function turnrefresher() {
   console.log(await response.text())
 }
 
-const commands = ['info', 'check', 'use', 'buy', 'work', 'status'];
+const commands = ['info', 'check', 'use', 'buy', 'work', 'move'];
 //Creates the first button row
 for (const bcommand of commands) {
   //Creating the button
@@ -38,8 +38,12 @@ for (const bcommand of commands) {
         choicebutton.addEventListener('click', async function(){
           console.log(this.id)
           const response2 = await fetch(`http://127.0.0.1:3000/${bcommand}item/${this.id}`)
-          document.querySelector('#textbox').innerText = await response2.json()
+          const data2 = await response2.json()
+          document.querySelector('#textbox').innerText = data2[0];
           statupdater();
+          if (bcommand === "use") {
+            document.querySelector('#buttonrow2').removeChild(this)
+          }
         })
         document.querySelector('#buttonrow2').appendChild(choicebutton)
       }

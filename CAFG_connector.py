@@ -6,6 +6,7 @@ import EventHandler
 import CAFG_variables as gloVar
 from EventHandler import actioncheck
 
+"""
 conn = mysql.connector.connect(
     host="localhost",
     user="surviver",
@@ -14,6 +15,7 @@ conn = mysql.connector.connect(
     charset="latin1",
     collation="latin1_swedish_ci",
 )
+"""
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -24,9 +26,17 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def info():
     return [EventHandler.actionhandlersub("info")]
 
+@app.route('/use')
+def use():
+    return EventHandler.actionuse()
+
+@app.route('/useitem/<item>')
+def useitem(item):
+    return EventHandler.actionusesub(item)
+
 @app.route('/buy')
 def buy():
-    return EventHandler.actionhandlersub("buy")
+    return EventHandler.actionbuy()
 
 @app.route('/buyitem/<item>')
 def buyitem(item):
@@ -39,9 +49,9 @@ def check():
 @app.route('/status')
 def status():
     return [str(gloVar.current_score), str(gloVar.player_money),
-            str(gloVar.time_units), str(gloVar.current_country),
+            str(gloVar.time_units), str(gloVar.current_airport),
             str(gloVar.global_threat),
-            str(gloVar.local_threat[gloVar.current_country])]
+            str(gloVar.local_threat[gloVar.current_airport])]
 
 @app.route('/turnupdate')
 def turnupdate():
@@ -59,12 +69,22 @@ def resetgame():
     gloVar.player_luck = 0
     gloVar.player_items = []
     gloVar.previous_travel_distance = 0
-    gloVar.current_country = "AGGH"
-    gloVar.local_threat = {gloVar.current_country: 0}
+    gloVar.current_airport = "AGGH"
+    gloVar.local_threat = {gloVar.current_airport: 0}
     gloVar.global_country_index = 0
+    return "Game reseted"
 
 @app.route('/updatemap')
 def updatemap():
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="surviver",
+        password="123",
+        database="flight_game",
+        charset="latin1",
+        collation="latin1_swedish_ci",
+    )
+
     if not conn.is_connected():
         conn.reconnect()
 
