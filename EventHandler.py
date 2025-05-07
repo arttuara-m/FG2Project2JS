@@ -538,8 +538,8 @@ def timeunitrefresher(amount):
 
 
 def haversine(lat1, lon1, lat2, lon2):
-    """Calculate the great-circle distance between two points using the Haversine formula."""
-    R = 6371  # Earth radius in km
+    #Calculate the great-circle distance between two points using the Haversine formula.
+    r = 6371  # Earth radius in km
     phi1, phi2 = math.radians(lat1), math.radians(lat2)
     delta_phi = math.radians(lat2 - lat1)
     delta_lambda = math.radians(lon2 - lon1)
@@ -550,10 +550,20 @@ def haversine(lat1, lon1, lat2, lon2):
     )
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
-    return R * c  # Distance in km
+    return r * c  # Distance in km
 
-def movementhandler():
-    conn = mysqlconnector()
+
+
+#def movementhandler():
+
+#def movementhandler():
+conn = mysqlconnector()
+
+
+# Set travel range (change this value to fit your game mechanics)
+travel_range_km = 3000  # Example range
+
+def nearbyairports(travel_range):
     if not conn.is_connected():
         conn.reconnect()
 
@@ -576,17 +586,14 @@ def movementhandler():
 
     current_lat, current_lon = current_airport[3], current_airport[4]
 
-    print(f"\nYou are currently at {current_airport[2]} ({current_airport[1]}).")
-
-    # Set travel range (change this value to fit your game mechanics)
-    travel_range_km = 3000  # Example range
+    #print(f"\nYou are currently at {current_airport[2]} ({current_airport[1]}).")
 
     # Find nearby airports within the range
     nearby_airports = [
         port
         for port in airports
         if port[0] != current_airport[0]
-        and haversine(current_lat, current_lon, port[3], port[4]) < travel_range_km
+        and haversine(current_lat, current_lon, port[3], port[4]) < travel_range
     ]
 
     if not nearby_airports:

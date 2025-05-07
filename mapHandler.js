@@ -22,15 +22,18 @@ function updateCoords(newcoordsX,newcoordsY){
     coords[1] = newcoordsY
 }
 
-function addAirportMarker(airportLat, airportLong, ICAO, name){
-    L.marker([airportLong,airportLat])
+function addAirportMarkers(){
+    for (let i=0;i<listOfAirports;i++){
+        L.marker([airportLong,airportLat])
         .addTo(map)
-        .popupmenu()
+    }
 }
 
-
+//################   vvvvvvv   mitä tekee hän? vvvvv   #######################3
 //let jsHTMLtest = document.getElementById("showcountry").innerText
 //console.log(jsHTMLtest)
+
+
 let map = L.map("map", {
     zoomControl: false
 }).setView(coords, 13);
@@ -46,3 +49,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const playerPositionMarker = L.marker(coords)
     .addTo(map)
     .bindPopup("You are currently at: "+coords);
+
+/*
+var choicePopUp = L.popup();
+var container = L.DomUtil.create('div');
+chooseBtn = this.createButton('Choose airport', container);
+div.innerHTML = ''+chooseBtn
+L.DomEvent.on(destBtn, 'click', () => {
+  alert("Airport chosen");
+});
+*/
