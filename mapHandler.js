@@ -12,7 +12,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// Example: Add a marker
+// Add a marker
 const marker = L.marker(coords)
   .addTo(map)
   .bindPopup("Welcome to your game map!")
