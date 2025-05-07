@@ -24,7 +24,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/info')
 def info():
-    return [EventHandler.actionhandlersub("info")]
+    return [EventHandler.listcommands()]
 
 @app.route('/use')
 def use():
@@ -41,6 +41,14 @@ def buy():
 @app.route('/buyitem/<item>')
 def buyitem(item):
     return EventHandler.buythis(item)
+
+@app.route('/work')
+def work():
+    return EventHandler.actionwork()
+
+@app.route('/workitem/<item>')
+def workitem(item):
+    return [EventHandler.actionworksub(item)]
 
 @app.route('/check')
 def check():

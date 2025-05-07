@@ -69,6 +69,7 @@ lottery_fake.buy = f""
 lottery_fake.rarity = rare
 lottery_fake.price = expensive
 lottery_fake.use_time = 1
+lottery_fake.active = True
 lottery_fake.type = True
 #Gives 1000-3000€, threat up by 3 000 no matter the outcome.
 def lotteryfake(self):
@@ -172,14 +173,10 @@ snow_globe.buy = ""
 snow_globe.rarity = epic
 snow_globe.price = average
 snow_globe.use_time = -1
-snow_globe.active = False
+snow_globe.active = True
 #score
 def shakeglobe(self):
-    print(f"You shake the snowglobe and watch the artificial snowflakes fall...\n"
-          f"...\n")
-    time.sleep(1.5)
-    print(f"What fun!!!")
-    gv.current_score += 100
+    gv.current_score += 500
 snow_globe.activate =shakeglobe.__get__(snow_globe, Item)
 
 
@@ -307,7 +304,7 @@ warhead.buy = "You can't believe you got this for free, it feels too good to be 
 warhead.rarity = legendary
 warhead.price = free  # it's free!
 warhead.use_time = -1
-warhead.active = False
+warhead.active = True
 #Local threat stays at 0, global threat grows by -5%
 #On start of a turn, theres ~1-5% to print= "The nuclear warhead is shaking!"
 #Then game throws a d20= if 2-20 = print "Nothing happened...", if 1 = "Game over"
@@ -334,7 +331,8 @@ def checkstability():
     gv.local_threat[gv.current_airport] = 0
     gv.global_threat -= int(gv.global_threat * 0.05)
 warhead.activate = checkstability.__get__(warhead,Item)
-
+def nucelearexplosion(self):
+    gv.global_threat = 100000000000000
 
 
 kerosene = Item("Jetfuel")

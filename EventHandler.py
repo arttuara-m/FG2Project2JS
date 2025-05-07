@@ -198,10 +198,7 @@ def listcommands():
             f"{'use'} ---  use your items\n "
             f"{'buy'} ---  buy more items\n "
             f"{'work'} ---  work for money\n"
-            f"{'chill'} ---  just take it easy\n"
-            f"{'leave'} ---  go to the next airport\n"
-            f"{'status'} ---  check your commands")
-
+            f"{'leave'} ---  go to the next airport\n")
 
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -313,35 +310,35 @@ def actionusesub(used_item):
         # uses the fake lottery coupon
         case CAFG_items.lottery_fake:
             CAFG_items.lottery_fake.activate()
-            return [text]
+            return [text, list_of_item_names]
         # uses lottery coupon
         case CAFG_items.lottery_coupon:
             CAFG_items.lottery_coupon.activate()
-            return [text]
+            return [text, list_of_item_names]
         # uses the invisibility cape
         case CAFG_items.invis_cape:
             CAFG_items.invis_cape.activate()
-            return [text]
+            return [text, list_of_item_names]
         # uses the fortune cookie
         case CAFG_items.luck_cookie:
             CAFG_items.luck_cookie.activate()
-            return [text]
+            return [text, list_of_item_names]
         # uses the Ebin-Sip -energy drink
         case CAFG_items.energydrink:
             CAFG_items.energydrink.activate()
-            return [text]
+            return [text, list_of_item_names]
         # ponders the used 1k bill.
         case CAFG_items.tonnin_seteli:
             CAFG_items.tonnin_seteli.activate()
-            return [text]
+            return [text, list_of_item_names]
         # uses the arcade ticket and gives score
         case CAFG_items.arcade_ticket:
             CAFG_items.arcade_ticket.activate()
-            return [text]
+            return [text, list_of_item_names]
         # uses the snow globe and gives score
         case CAFG_items.snow_globe:
             CAFG_items.snow_globe.activate()
-            return [text]
+            return [text, list_of_item_names]
 
     return [text, list_of_item_names]
 
@@ -398,102 +395,42 @@ def actioncheck():
 
 # allows you to do work
 def actionwork():
-    # PLACEHOLDER, REPLACE ONCE THERE'S MORE JOBS!
-    print("'clean' to clean airport.")
-    print("'rob' to rob a random person.")
-    print()
-    job_to_do = input("What work do you want to do (N to go back): ")
-
-    # check valid input
-    if job_to_do == "N":
-        return
-    else:
-        print()
-        actionworksub(job_to_do)
+    text = "What work do you want to do"
+    list_of_jobs = ["clean", "rob"]
+    return [text, list_of_jobs]
 
 
 def actionworksub(used_job):
     match used_job:
         # clean airport job
         case "clean":
+            worktime = 3
             stopwork = False
             while not stopwork:
-                worktime = input("How long do you want to work for?(N to go back): ")
-                print()
-
-                # checks for valid input
-                if worktime == "N":
-                    print("You've decided you didn't want to clean the airport.")
+                if (
+                        CAFG_items.janitor in gv.player_items
+                ):  # Gives extra money if player has janitors clothes
+                    money = 50 * int(worktime)
+                    gv.player_money += money
                     stopwork = True
-                elif not worktime.isdigit():
-                    print("Invalid work time.")
-                    print()
                 else:
-                    cleaning_art = [
-                        r"""        "Sweep, sweep sweep..."
-                (ㆆ_ㆆ)
-               🧹 /|
-                  / \ """,
-                        r"""       "I should've just robbed a guy..."
-                (ㆆ_ㆆ)
-               🧹 /|
-                  / \ """,
-                        r"""        "Is this blood...?"
-                (⊙_⊙;)
-               🧹 /|
-                  / \ """,
-                        r"""
-    "d̴̼͉̈̆f̵̭̒̅̎̆̚o̴̗͙͎̍͐͊͠g̸̢̟͎̜͌̚͘s̴̯̒̓̈p̸̹͚͌̎̿̂͠ǧ̵̰͛ͅò̸͍̃̇̄̈́͜ẽ̸̱̻̞̹r̸͖͉̃͆͘j̷̡̲̹̯̍͜g̶̡̲̠͙̐̂̾͜p̶̧̟̱̲̐́̓̚"
-                  👽
-               🧹 /|
-                  / \
-                        """,
-                        r"""
-        "WI WI WI WI UWAUWA"
-                ₍^. .^₎
-               🧹 /|
-                  / \
-                          """,
-                    ]
-                    print(random.choice(cleaning_art))
-                    print("Cleaning the airport...")
-                    if (
-                            CAFG_items.janitor in gv.player_items
-                    ):  # Gives extra money if player has janitors clothes
-                        money = 50 * int(worktime)
-                        gv.player_money += money
-                        print(f"You cleaned the airport for {money}€!")
-                        print(f"Your current balance is {gv.player_money}€.")
-                        stopwork = True
-                    else:
-                        money = 20 * int(worktime)
-                        gv.player_money += money
-                        print(f"You cleaned the airport for {money}€...")
-                        print(f"Your current balance is {gv.player_money}€.")
-                        stopwork = True
-                print()
-                timehandler(
-                    int(worktime), -5
-                )  # Uses worktime amount of gv.time_units and decreases the local threat by -5 per spent unit.
-            return
+                    money = 20 * int(worktime)
+                    gv.player_money += money
+                    stopwork = True
+            timeunithandler(3)
+            return "You enjoyed your time cleaning the floor. It is beautiful."
 
         # ROBS AN MF
         case "rob":
             robbed = random.randint(1 + gv.player_luck, 200 + gv.player_luck)
-            print(r"""                 "Give money thx."
-                   ( ͡❛ ͜ʖ ͡❛)      (⊙_⊙;)
-                       |\ 🔪         /|      
-                     / \            / \ """)
-            print(f"You robbed an random civilian for {robbed}€!")
             gv.player_money += robbed
             # threat increases by 10 for every € stolen, player luck decreases this
             localthreathandler(1, robbed * (10 - (int(gv.player_luck / 10))))
-            return
+            timeunithandler(1)
+            return "Successful robbery!"
 
         case _:
-            print("Unknown job")
-            return
-
+            return "Unknown job"
 
 # checks for passive and active item effects at the start of the turn
 def itemchecker():
@@ -557,13 +494,14 @@ def haversine(lat1, lon1, lat2, lon2):
 #def movementhandler():
 
 #def movementhandler():
-conn = mysqlconnector()
+
 
 
 # Set travel range (change this value to fit your game mechanics)
 travel_range_km = 3000  # Example range
 
 def nearbyairports(travel_range):
+    conn = mysqlconnector()
     if not conn.is_connected():
         conn.reconnect()
 
@@ -577,7 +515,7 @@ def nearbyairports(travel_range):
 
     # Find the current airport based on gv.current_airport (which is stored as an ICAO code)
     current_airport = next(
-        (port for port in airports if port[1] == gv.current_country), None
+        (port for port in airports if port[1] == gv.current_airport), None
     )
 
     if not current_airport:
@@ -651,6 +589,7 @@ def nearbyairports(travel_range):
     )
 
 def timeunithandler(amount):
+    localthreathandler(200, amount)
     gv.time_units -= amount
     if gv.time_units < 0:
         gv.global_threat+=1000

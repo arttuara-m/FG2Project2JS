@@ -62,5 +62,6 @@ resetbutton.addEventListener('click', async function(){
   location.reload()
 })
 
+
 turnrefresher();
 statupdater();
