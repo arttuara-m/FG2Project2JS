@@ -114,8 +114,8 @@ def lotterystart(self):
         money = random.randint(500, 2000)
     else:
         money = 10000
+        gv.player_money += money
     return f"Congratulations! You got {money}€ from the lottery!"
-    gv.player_money += money
 lottery_coupon.activate = lotterystart.__get__(lottery_coupon,Item)
 
 

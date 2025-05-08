@@ -1,4 +1,7 @@
 import random
+
+from click import prompt
+
 import CAFG_variables as gv
 import CAFG_items
 
@@ -16,11 +19,12 @@ fox_fires.desc = "Northern lights can be seen in the sky."
 fox_fires.rarity = "Semi Harvinainen"
 fox_fires.location = "country dependent"
 def aurora(self):
-    print("Their beaty has captured the attention of everyone.\n"
-          "People are distracted and you feel more lucky.")
     addluck = random.randint(50, 100)
-    print(f"You gained +{addluck} luck!")
     gv.player_luck += addluck
+    return(f'{fox_fires.desc}\n'
+            "Their beaty has captured the attention of everyone.\n"
+                "People are distracted and you feel more lucky.\n"
+                f"You gained +{addluck} luck!")
 fox_fires.activate=aurora.__get__(fox_fires,Event)
 
 
@@ -31,7 +35,8 @@ national_hero.desc = "A terror attack is about to happen at the airport!"
 national_hero.rarity = "Harvinainen"
 national_hero.location = "everywhere"
 def terror(self):
-    print("Quickly! De-escalate the sitsuation!")
+    print(f'{national_hero.desc}\n'
+        "Quickly! De-escalate the sitsuation!")
     active = True
     tries = 3
     random_correct = random.randint(1, 4)
@@ -101,8 +106,10 @@ space_express.rarity = "Harvinainen"
 space_express.location = "everywhere"
 def expressdelivery(self):
     qawason_random_item = random.randint(0, len(CAFG_items.qawason_items) - 1)
-    print(f"You got one {CAFG_items.qawason_items[int(qawason_random_item)].name}!")
     gv.player_items.append(CAFG_items.qawason_items[int(qawason_random_item)])
+    return (f'{space_express.desc}\n'
+            f"You got one {CAFG_items.qawason_items[int(qawason_random_item)].name}!")
+
 space_express.activate=expressdelivery.__get__(space_express,Event)
 
 

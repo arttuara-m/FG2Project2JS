@@ -34,7 +34,7 @@ def turnhandler():
         deathhandler()
     shoprandomiser(3)
     timehandler(0, 0)
-    eventhandler(gv.player_luck)
+    eventhandler()
     #actionhandler()
     # movementhandler()
 
@@ -119,10 +119,11 @@ def eventhandlersub():
 
                 # If player succeeds, resets local threat. If player fails, game ends.(Unless player has bulletproof vest)
                 case CAFG_events.national_hero:  #
-                    die = False
-                    CAFG_events.national_hero.activate()
-                    if die:
-                        deathhandler()
+
+                    #die = False
+                    #CAFG_events.national_hero.activate()
+                    #if die:
+                    #    deathhandler()
                     return "WIP"
             # prints special event end bar.
             print(
@@ -131,8 +132,8 @@ def eventhandlersub():
             return
 
         case _:
-            print("It's a very boring airport! One star out of five!")
-            return
+            return "It's a very boring airport! One star out of five!"
+
 
 '''
 # handles the actions that the player can perform
@@ -391,13 +392,17 @@ def buythis(itemtobuy):
 # checks your items
 def actioncheck():
     if len(gv.player_items) == 0:
-        return "You have no items. Go buy some"
+        return ["You have no items. Go buy some"]
     else:
-        items = ""
+        desc = []
         for item in gv.player_items:
-            items = f"{item.name}\n{item.desc}\n\n" + items
-        return items
+            desc += [ item.name, f'\n{item.desc}\n\n']
 
+        items = []
+        for item in gv.player_items:
+            items.append(item.name)
+        text = "Here you can check the effects of your items by clicking one of them."
+        return [text, items, desc]
     # ^^^^^ should work ^^^^^
 
 
@@ -430,12 +435,18 @@ def actionworksub(used_job):
 
         # ROBS AN MF
         case "rob":
-            robbed = random.randint(1 + gv.player_luck, 200 + gv.player_luck)
-            gv.player_money += robbed
+            if CAFG_items.firearm in gv.player_items:
+                robbed = random.randint(10 + gv.player_luck, 500 + gv.player_luck)
+                gv.player_money += robbed
+                text = f"Using your firearm you committed an efficient robbery! (+{robbed}€)"
+            else:
+                robbed = random.randint(1 + gv.player_luck, 200 + gv.player_luck)
+                gv.player_money += robbed
+                text = f"Successful robbery! (+{robbed}€)"
             # threat increases by 10 for every € stolen, player luck decreases this
             localthreathandler(1, robbed * (10 - (int(gv.player_luck / 10))))
             timeunithandler(1)
-            return f"Successful robbery! (+{robbed}€)"
+            return text
 
         case _:
             return "Unknown job"

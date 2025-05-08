@@ -56,7 +56,7 @@ for (const bcommand of commands) {
     document.querySelector("#buttonrow2").innerHTML = "";
     //statupdater(); en usko et tätä tarvii enää?
 
-    if (data.length === 2) {
+    if (data.length >= 2) {
       //the program checks if additional data was returned
       for (const item of data[1]) {
         const choicebutton = document.createElement("button");
@@ -72,7 +72,7 @@ for (const bcommand of commands) {
           statupdater();
 
           for (let i in data[1] ){
-                  document.getElementById("buttonrow2").innerHTML = '';
+              document.getElementById("buttonrow2").innerHTML = '';
           }
         });
         document.querySelector("#buttonrow2").appendChild(choicebutton);

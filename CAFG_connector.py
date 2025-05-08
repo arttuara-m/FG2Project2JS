@@ -52,7 +52,17 @@ def workitem(item):
 
 @app.route('/check')
 def check():
-    return [actioncheck()]
+    list = actioncheck()
+    list.pop(-1)
+    return list
+
+@app.route('/checkitem/<item>')
+def checkitem(item):
+    list = actioncheck()
+    list.pop(0)
+    list.pop(0)
+    return list
+
 
 @app.route('/status')
 def status():
