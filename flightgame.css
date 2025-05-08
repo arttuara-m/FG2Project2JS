@@ -1,9 +1,9 @@
 header {
-  psodition: fixed;
+  podition: fixed;
   top: 0;
   left: 0;
   padding-left: 20px;
-  backlight-color: #fff;
+  background-color: #fff;
 }
 
 body {
