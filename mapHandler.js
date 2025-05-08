@@ -1,37 +1,4 @@
 let coords = [0,0]
-let listOfAirports = []
-
-async function mapUpdater(){
-    const response = await fetch(`http://127.0.0.1:3000/updatemap`);
-    const data = await response.json();
-    console.log("mapUpdater: new coordinates; "+data)
-    updateCoords(data[0], data[1])
-}
-async function fetchAirportsInRange(){
-    const response = await fetch(`http://127.0.0.1:3000/availableairports`)
-    const data = await response.json()
-    //if (data.length <= 2){
-    //    for (const item of data[0]) {
-    //        console.log('Airport found: '+item[1])
-    //    }}
-}
-
-function updateCoords(newcoordsX,newcoordsY){
-    coords[0] = newcoordsX
-    coords[1] = newcoordsY
-}
-
-function addAirportMarkers(){
-    for (let i=0;i<listOfAirports;i++){
-        L.marker([airportLong,airportLat])
-        .addTo(map)
-    }
-}
-
-//################   vvvvvvv   mitä tekee hän? vvvvv   #######################3
-//let jsHTMLtest = document.getElementById("showcountry").innerText
-//console.log(jsHTMLtest)
-
 
 let map = L.map("map", {
     zoomControl: false
@@ -44,10 +11,38 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-//Add a marker
+//Add a player marker
 const playerPositionMarker = L.marker(coords)
     .addTo(map)
     .bindPopup("You are currently at: "+coords);
+
+async function mapUpdater(){
+    const response = await fetch(`http://127.0.0.1:3000/updatemap`);
+    const data = await response.json();
+    console.log("mapUpdater: new coordinates; "+data)
+    updateCoords(data[0], data[1])
+}
+
+
+function updateCoords(newcoordsX,newcoordsY){
+    coords[0] = newcoordsX
+    coords[1] = newcoordsY
+}
+
+function addAirportMarkers(data){
+    if (data.length <= 2){
+        for (const item of data[1]) {
+            airportCoords = [ parseFloat(item[2]) ,parseFloat(item[3])]
+            console.log('addAirportMarker: data recieved for '+item[0]+
+                '\n at coordinates: '+airportCoords)
+            const newAirport = L.marker(airportCoords)
+                .addTo(map).bindPopup(item[0]+' '+item[1]);
+        }}
+}
+
+//################   vvvvvvv   mitä tekee hän? vvvvv   ################
+//let jsHTMLtest = document.getElementById("showcountry").innerText
+//console.log(jsHTMLtest)
 
 /*
 var choicePopUp = L.popup();
