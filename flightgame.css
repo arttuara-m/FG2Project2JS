@@ -8,7 +8,6 @@ header {
   justify-content: center;
   height: 100px;
   color: white;
-  z-index: 1000;
   overflow: hidden;
 }
 
@@ -118,4 +117,3 @@ li {
   margin-right: auto;
   display: block;
 }
-
