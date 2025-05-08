@@ -124,7 +124,10 @@ def eventhandlersub():
                     #CAFG_events.national_hero.activate()
                     #if die:
                     #    deathhandler()
-                    return "WIP"
+                    gv.local_threat =-1
+                    return ("The airport is on fire.\n"
+                            "-1 local threat \n"
+                            " ")
             # prints special event end bar.
             print(
                 "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
@@ -394,9 +397,9 @@ def actioncheck():
     if len(gv.player_items) == 0:
         return ["You have no items. Go buy some"]
     else:
-        desc = []
+        desc = {}
         for item in gv.player_items:
-            desc += [ item.name, f'\n{item.desc}\n\n']
+            desc[item.name] = item.desc
 
         items = []
         for item in gv.player_items:

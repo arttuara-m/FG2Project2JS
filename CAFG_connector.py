@@ -61,7 +61,7 @@ def checkitem(item):
     list = actioncheck()
     list.pop(0)
     list.pop(0)
-    return list
+    return [list[0][item]]
 
 
 @app.route('/status')
