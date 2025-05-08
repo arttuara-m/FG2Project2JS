@@ -42,7 +42,7 @@ button:hover {
 
 .gameCard {
   position: fixed;
-  width: 400px;
+  width: 30%;
   max-height: 200px;
   overflow-y: auto;
   bottom: 20px;
@@ -57,7 +57,7 @@ button:hover {
 
 .textBox {
   position: fixed;
-  width: 1000px;
+  width: 60%;
   max-height: 200px;
   bottom: 20px;
   right: 20px;
