@@ -58,7 +58,7 @@ button:hover {
 .textBox {
   position: fixed;
   width: 1000px;
-  height: 200px;
+  max-height: 200px;
   bottom: 20px;
   right: 20px;
   border-radius: 30px;
