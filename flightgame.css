@@ -64,6 +64,7 @@ button:hover {
   border-radius: 30px;
   padding: 10px;
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   justify-content: space-between;
   background-color: #cccccc;
