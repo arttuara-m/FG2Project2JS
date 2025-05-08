@@ -586,6 +586,28 @@ def nearbyairports(travel_range):
     gv.previous_travel_distance = haversine(
         current_lat, current_lon, chosen_airport[3], chosen_airport[4]
     )
+def airportandcountryfetch():
+    print("works1")
+    conn = mysql.connector.connect(
+        host="127.0.0.1",
+        user="surviver",
+        password="123",
+        database="flight_game",
+        charset="latin1",
+        collation="latin1_swedish_ci",
+    )
+    print("works2")
+    if not conn.is_connected():
+        conn.reconnect()
+    print("works2")
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT latitude_deg FROM airport WHERE gps_code = 'AGGH';"
+        #f"SELECT airport.name, country.name FROM airport, country WHERE airport.id = {str(gv.current_airport)}"
+    )
+    portandcountry = cursor.fetchall()
+    print(portandcountry)
+
 
 def timeunithandler(amount):
     localthreathandler(200, amount)
