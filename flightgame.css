@@ -41,18 +41,37 @@ button:hover {
   background-color: cornflowerblue;
 }
 
+#playergif {
+  width: 80px;
+  display: block;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+}
+
 .maincard {
   position: fixed;
-  width: 300px;
+  width: fit-content;
   height: 180px;
   top: 50px;
   left: 20px;
   border-radius: 8px;
   padding: 10px;
   display: flex;
+  align-items: center;
+  background-color: rgba(240, 248, 255, 0.6);
+}
+
+.info-left {
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: rgba(240, 248, 255, 0.6);
+}
+
+.info-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
 }
 
 .gameCard {
