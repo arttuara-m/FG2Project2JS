@@ -1,63 +1,68 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-    <link rel="stylesheet" href="flightgame.css"/>
+    <link rel="stylesheet" href="flightgame.css" />
     <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-            crossorigin=""
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap"
+      rel="stylesheet"
     />
     <script src="flightgame.js" defer></script>
     <script src="mapHandler.js" defer></script>
-</head>
-<body>
-<header>
-    <h1>Alien tourism simulator</h1>
-</header>
-<main id="main">
-    <div id="maingroup">
+  </head>
+  <body>
+    <header>
+      <h1>Alien tourism simulator</h1>
+    </header>
+    <main id="main">
+      <div id="maingroup">
         <article id="picandbuttons">
-            <div id="map"></div>
-            <div class="buttonrow" id="buttonrow1">
-                <!--The command buttons go here-->
-
-            </div>
-            <div class="buttonrow" id="buttonrow2">
-                <!-- The choice buttons go here-->
-            </div>
+          <div id="map"></div>
+          <div class="buttonrow" id="buttonrow1">
+            <!--The command buttons go here-->
+          </div>
+          <div class="buttonrow" id="buttonrow2">
+            <!-- The choice buttons go here-->
+          </div>
         </article>
         <aside id="sidebar">
-            <button id="resetbutton">reset game</button>
-            <ul>
-                <li id="showscore">Score:</li>
-                <li id="showmoney">Money:</li>
-                <li id="showtimeunits">Timeunits:</li>
-                <li id="showairport">Airport:</li>
-                <li id="showgthreat">Global threat:</li>
-                <li id="showlthreat">Local threat:</li>
-            </ul>
+          <button id="resetbutton">reset game</button>
+          <ul>
+            <li id="showscore">Score:</li>
+            <li id="showmoney">Money:</li>
+            <li id="showtimeunits">Timeunits:</li>
+            <li id="showairport">Airport:</li>
+            <li id="showgthreat">Global threat:</li>
+            <li id="showlthreat">Local threat:</li>
+          </ul>
         </aside>
-    </div>
-    <p id="textbox">
-        You're an extraterrestrial alien, one who was flying carefree with your UFO. You just enjoyed exploring the inky
-        black space.
-        But a critical system failure sent your vessel spiraling out of control, tearing through the sky like a fallen
-        meteor.
-        You landed in Earth, a world inhabited by strange bipeds who have built a civilization. You decide to shapeshift
-        into this strange form.
-        With no possible way to return to the galaxy, you decide to blend in, become a tourist. Grab a hawaiian shirt
-        that tourists wear.
-        But be careful. The governments of all countries have been informed of an extraterrestrial creature roaming
-        around the world.
-        Still, you decide to fly around to see the wonders of Earth. Just try to not get killed!
-    </p>
-</main>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
-<script src="mapHandler.js"></script>
-</body>
+      </div>
+      <p id="textbox">
+        You're an extraterrestrial alien, one who was flying carefree with your
+        UFO. You just enjoyed exploring the inky black space. But a critical
+        system failure sent your vessel spiraling out of control, tearing
+        through the sky like a fallen meteor. You landed in Earth, a world
+        inhabited by strange bipeds who have built a civilization. You decide to
+        shapeshift into this strange form. With no possible way to return to the
+        galaxy, you decide to blend in, become a tourist. Grab a hawaiian shirt
+        that tourists wear. But be careful. The governments of all countries
+        have been informed of an extraterrestrial creature roaming around the
+        world. Still, you decide to fly around to see the wonders of Earth. Just
+        try to not get killed!
+      </p>
+    </main>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="mapHandler.js"></script>
+  </body>
 </html>
