@@ -350,7 +350,15 @@ def actionbuy():
     if len(gv.shop_items) == 0:
         text = "You bought all the items. You lament that your shopping time has ended."
     else:
-        text = "What do you want to buy"
+        #lists item names and prices to be used in text element in html
+        prices = ""
+        for i, item in enumerate(gv.shop_items):
+            prices += f'{item.name} : {item.price}€    |     '
+
+        text = ("What do you want to buy?\n"
+                f"__________________________[Todays offers]__________________________\n"
+                f"{prices}")
+        #lists item names to be used as button elements in html
         for i, item in enumerate(gv.shop_items):
             list_of_item_names.append(item.name)
     return [text, list_of_item_names]
@@ -372,10 +380,13 @@ def buythis(itemtobuy):
         bought_item = gv.shop_items[shop_item_number]
         gv.player_items.append(bought_item)
         gv.player_money -= gv.shop_items[shop_item_number].price
+        if gv.shop_items[shop_item_number] == CAFG_items.tonnin_seteli:
+            gv.player_money -= 998
         timehandler(1, gv.shop_items[shop_item_number].price)
         # uses 1 unit of time and increases local threat by 10 with said amount of time.
+        text = (f"You bought {itemtobuy} for {gv.shop_items[shop_item_number].price}€ !\n"
+                f"{gv.shop_items[shop_item_number].buy}")
         gv.shop_items.pop(shop_item_number)
-        text = f"You bought {itemtobuy}!"
 
     return [text, shop_item_names]
 
@@ -418,7 +429,7 @@ def actionworksub(used_job):
                     gv.player_money += money
                     stopwork = True
             timeunithandler(3)
-            return "You enjoyed your time cleaning the floor. It is beautiful."
+            return f"You enjoyed your time cleaning the floor. It is beautiful. (Earned {money}€)"
 
         # ROBS AN MF
         case "rob":
@@ -427,7 +438,7 @@ def actionworksub(used_job):
             # threat increases by 10 for every € stolen, player luck decreases this
             localthreathandler(1, robbed * (10 - (int(gv.player_luck / 10))))
             timeunithandler(1)
-            return "Successful robbery!"
+            return f"Successful robbery! (+{robbed}€)"
 
         case _:
             return "Unknown job"

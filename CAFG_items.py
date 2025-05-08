@@ -256,7 +256,7 @@ bulletvest.rarity = epic
 bulletvest.price = expensive
 bulletvest.use_time = 1
 bulletvest.active = False
-#gives the player +50 health(once that is added)
+#gives the player +50 health(once that is added, for now just protects you in national_hero event)
 
 
 
