@@ -54,7 +54,7 @@ invis_cape.active = True
 #[local threat]/2 when used
 def invis(self):
     gv.local_threat[gv.current_airport] = gv.local_threat[gv.current_airport] // 2
-    print("The cape made you harder to track! (Decreased local threat by 50%)")
+    return "The cape made you harder to track! (Decreased local threat by 50%)"
 invis_cape.activate = invis.__get__(invis_cape,Item)
 
 
@@ -75,8 +75,8 @@ lottery_fake.type = True
 def lotteryfake(self):
     money = random.randint(1000, 3000)
     gv.local_threat[gv.current_airport] += 3000 - (gv.player_luck // 100)
-    print(f"You manage to get {money}€, but now you are in trouble!")
     gv.player_money += money
+    return f"You managed to get {money}€, but now you are in trouble!"
 lottery_fake.activate = lotteryfake.__get__(lottery_fake,Item)
 
 
@@ -114,7 +114,7 @@ def lotterystart(self):
         money = random.randint(500, 2000)
     else:
         money = 10000
-    print(f"Congratulations! You got {money}€ from the lottery!")
+    return f"Congratulations! You got {money}€ from the lottery!"
     gv.player_money += money
 lottery_coupon.activate = lotterystart.__get__(lottery_coupon,Item)
 
@@ -138,7 +138,7 @@ def fortune(self):
     else:
         gv.player_luck -= 10
         luck = -10
-    print(f"You read the fortune from the cookie and got {luck} luck!")
+    return f"You read the fortune from the cookie and got {luck} luck!"
 luck_cookie.activate = fortune.__get__(luck_cookie, Item)
 
 
@@ -157,7 +157,7 @@ energydrink.active = True
 def addenergy(self):
     addtime = 4
     gv.time_units += addtime
-    print(f"You chug the energy drink and feel energized.\n"
+    return (f"You chug the energy drink and feel energized.\n"
           f"(Gained {addtime} time units)\n"
           f"You feel like you could do a wheelie with any vehicle.")
 energydrink.activate = addenergy.__get__(energydrink, Item)
@@ -177,6 +177,8 @@ snow_globe.active = True
 #score
 def shakeglobe(self):
     gv.current_score += 500
+    return (f"You gave the snowglobe a good shake and \n"
+            f"watched as the artificial snow in the globe fell.")
 snow_globe.activate =shakeglobe.__get__(snow_globe, Item)
 
 
@@ -192,8 +194,8 @@ arcade_ticket.use_time = 1
 arcade_ticket.active = True
 #scoreeeeeeeeeee
 def arcade(self):
-    print(f"You visit a local arcade to play some games and have some fun! Yippee!")
     gv.current_score += 100
+    return f"You visit a local arcade to play some games and have some fun! Yippee!"
 arcade_ticket.activate = arcade.__get__(arcade,Item)
 
 
@@ -210,8 +212,8 @@ s_rabbit_paw.active = False
 #Adds a certain % buff to luck.
 def rabbitluck(self):
     luck = random.randint(0, 20)
-    print(f"The rabbit's paw gives you +{luck} luck!")
     gv.player_luck += luck
+    return f"The rabbit's paw gives you +{luck} luck!"
 s_rabbit_paw.activate = rabbitluck.__get__(s_rabbit_paw,Item)
 
 
@@ -281,7 +283,7 @@ tonnin_seteli.price = very_cheap  # Se oli tonnin seteli...
 tonnin_seteli.use_time = -1
 tonnin_seteli.active = False
 def tonni(self):
-    print(f"You ponder at the purchase. It cost you 1000€...\n"
+    return (f"You ponder at the purchase. It cost you 1000€...\n"
           f"You've forgotten what the price was suppose to even be, why didn't the cashier give back any change?\n"
           f"Was it actually 1000€? Is this some special coffee? Or some caviar cookie?\n"
           f"Now you are questioning if you actually gave 1000€ for it or not...\n"

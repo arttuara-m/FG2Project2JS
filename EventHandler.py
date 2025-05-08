@@ -309,35 +309,35 @@ def actionusesub(used_item):
     match use_item:
         # uses the fake lottery coupon
         case CAFG_items.lottery_fake:
-            CAFG_items.lottery_fake.activate()
+            text += f'\n {CAFG_items.lottery_fake.activate()}'
             return [text, list_of_item_names]
         # uses lottery coupon
         case CAFG_items.lottery_coupon:
-            CAFG_items.lottery_coupon.activate()
+            text += f'\n {CAFG_items.lottery_coupon.activate()}'
             return [text, list_of_item_names]
         # uses the invisibility cape
         case CAFG_items.invis_cape:
-            CAFG_items.invis_cape.activate()
+            text += f'\n {CAFG_items.invis_cape.activate()}'
             return [text, list_of_item_names]
         # uses the fortune cookie
         case CAFG_items.luck_cookie:
-            CAFG_items.luck_cookie.activate()
+            text += f'\n {CAFG_items.luck_cookie.activate()}'
             return [text, list_of_item_names]
         # uses the Ebin-Sip -energy drink
         case CAFG_items.energydrink:
-            CAFG_items.energydrink.activate()
+            text += f'\n {CAFG_items.energydrink.activate()}'
             return [text, list_of_item_names]
         # ponders the used 1k bill.
         case CAFG_items.tonnin_seteli:
-            CAFG_items.tonnin_seteli.activate()
+            text += f'\n {CAFG_items.tonnin_seteli.activate()}'
             return [text, list_of_item_names]
         # uses the arcade ticket and gives score
         case CAFG_items.arcade_ticket:
-            CAFG_items.arcade_ticket.activate()
+            text += f'\n {CAFG_items.arcade_ticket.activate()}'
             return [text, list_of_item_names]
         # uses the snow globe and gives score
         case CAFG_items.snow_globe:
-            CAFG_items.snow_globe.activate()
+            text += f'\n {CAFG_items.snow_globe.activate()}'
             return [text, list_of_item_names]
 
     return [text, list_of_item_names]
@@ -355,8 +355,8 @@ def actionbuy():
         for i, item in enumerate(gv.shop_items):
             prices += f'{item.name} : {item.price}€    |     '
 
-        text = ("What do you want to buy?\n"
-                f"__________________________[Todays offers]__________________________\n"
+        text = ("What do you want to buy? Select from the buttons on the side below.\n"
+                f"_________________________[Todays offers]_________________________\n"
                 f"{prices}")
         #lists item names to be used as button elements in html
         for i, item in enumerate(gv.shop_items):
