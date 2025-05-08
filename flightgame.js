@@ -91,9 +91,9 @@ const moveButton = document.createElement('button')
                     //In other words for thee; For all ever so dependable functions which this concerns, the code
                     // it giveth the upmost urgent order to deliver the latest tidings of the realm
                     // for the most sovereign of the highly regarded variables that this occurrence may be of concern.
-                    clearMapMarkers()
-                    turnrefresher()
+                    await turnrefresher()
                     statupdater()
+                    clearMapMarkers()
                     mapUpdater()
 
                     //delete airport buttons
