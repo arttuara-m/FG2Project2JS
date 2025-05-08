@@ -48,8 +48,9 @@ for (const bcommand of commands) {
           const data2 = await response2.json();
           document.querySelector("#textbox").innerText = data2[0];
           statupdater();
-          if (bcommand === "use") {
-            document.querySelector("#buttonrow2").removeChild(this);
+
+          for (let i in data[1] ){
+                  document.getElementById("buttonrow2").innerHTML = '';
           }
         });
         document.querySelector("#buttonrow2").appendChild(choicebutton);
@@ -102,6 +103,8 @@ const moveButton = document.createElement('button')
                         console.log( document.getElementById("buttonrow2").children )
                         document.getElementById("buttonrow2").innerHTML = '';
                     }
+                    //clear text box
+                    document.querySelector('#textbox').innerText = ""
                 })
                 document.querySelector('#buttonrow2').appendChild(choicebutton1)
             }}

@@ -374,7 +374,7 @@ def buythis(itemtobuy):
         gv.player_money -= gv.shop_items[shop_item_number].price
         timehandler(1, gv.shop_items[shop_item_number].price)
         # uses 1 unit of time and increases local threat by 10 with said amount of time.
-        # gv.shop_items.pop(shop_item_number)
+        gv.shop_items.pop(shop_item_number)
         text = f"You bought {itemtobuy}!"
 
     return [text, shop_item_names]
