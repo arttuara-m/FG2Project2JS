@@ -31,6 +31,15 @@ async function turnrefresher() {
     console.log(await response.text())
 }
 
+async function eventChecker(){
+    console.log("Checking events...")
+    const response = await fetch(`http://127.0.0.1:3000/doevent`)
+    const data = await response.json()
+    document.querySelector("#textbox").innerText = data[0]
+    console.log(data[0])
+}
+
+//Command labels for buttons
 const commands = ["info", "check", "use", "buy", "work"];
 //Creates the first button row
 for (const bcommand of commands) {
@@ -74,6 +83,7 @@ for (const bcommand of commands) {
   document.querySelector('#buttonrow1').appendChild(infobutton);
 }
 
+
 //Adding a button to move from an airport to another
 const moveButton = document.createElement('button')
     moveButton.innerText="move"
@@ -98,6 +108,18 @@ const moveButton = document.createElement('button')
                     const data2 = await response2.json()
                     console.log(data2[0])
 
+
+                    //delete airport buttons
+                    for (let i in data[1] ){
+                        //these 2 log html data, was used to locate what needed to be deleted
+                        //console.log(data[1][i])
+                        //console.log( document.getElementById("buttonrow2").children )
+                        document.getElementById("buttonrow2").innerHTML = '';
+                    }
+                    //clear text box
+                    document.querySelector('#textbox').innerText = ""
+
+
                     //Calls the updatable variable updating functions to update all
                     // the updatable variables sometimes in need of updating
                     // that currently may be needed to be updated to update
@@ -106,18 +128,10 @@ const moveButton = document.createElement('button')
                     // it giveth the upmost urgent order to deliver the latest tidings of the realm
                     // for the most sovereign of the highly regarded variables that this occurrence may be of concern.
                     await turnrefresher()
-                    statupdater()
+                    await eventChecker()
+                    await statupdater()
                     clearMapMarkers()
                     mapUpdater()
-
-                    //delete airport buttons
-                    for (let i in data[1] ){
-                        console.log(data[1][i])
-                        console.log( document.getElementById("buttonrow2").children )
-                        document.getElementById("buttonrow2").innerHTML = '';
-                    }
-                    //clear text box
-                    document.querySelector('#textbox').innerText = ""
                 })
                 document.querySelector('#buttonrow2').appendChild(choicebutton1)
             }}

@@ -71,39 +71,36 @@ def timehandler(timespent, threat):
 
 
 # handles the arrival events
-def eventhandler(luck):
+def eventhandler():
+    eventhandlersub()
+
+
+def eventhandlersub():
     # vv THESE MULTIPLIERS ARE PLACEHOLDERS vv
     event_luck = (gv.local_threat.get(gv.current_airport) * 1) * (
             gv.global_threat * 1
-    ) - (luck * 1)
-    eventhandlersub(event_luck)
+    ) - (gv.player_luck * 1)
 
-
-def eventhandlersub(event_luck):
     event_happening = random.randint(0, 5)
     match event_happening:
         case 1:
-            print("You gained your yearly tax returns... again?... YIPPII")
             gv.player_money += 200
-            return
+            return "You gained your yearly tax returns... again?... YIPPII"
         case 2:
-            print(
+            shoprandomiser(5)  # Shop has 5 random items instead of 3.
+            return (
                 "You found a bazaar in the basement of the airport! Time for a shopping spree!"
             )
-            shoprandomiser(5)  # Shop has 5 random items instead of 3.
-            return
         case 3:
-            print(
+            gv.time_units += 2
+            return (
                 "You spontaneously grew a moustache. You feel strangely at peace with the universe."
             )
-            gv.time_units += 2
-            return
         case 4:
-            print(
+            gv.local_threat[gv.current_airport] -= 5  # drops gv.local_threat by 5 units
+            return (
                 "It's the anniversary of the airport! People are celebrating without a care in the world."
             )
-            gv.local_threat[gv.current_airport] -= 5  # drops gv.local_threat by 5 units
-            return
         case 5:
             event = random.randint(0, len(CAFG_events.used_events) - 1)
             # prints special event start bar
@@ -114,11 +111,11 @@ def eventhandlersub(event_luck):
             match CAFG_events.used_events[int(event)]:
                 # gives player luck between 50 and 100
                 case CAFG_events.fox_fires:
-                    CAFG_events.fox_fires.activate()
+                    return CAFG_events.fox_fires.activate()
 
                 # Adds a random item from the qwawason_items to player_items.
                 case CAFG_events.space_express:
-                    CAFG_events.space_express.activate()
+                    return CAFG_events.space_express.activate()
 
                 # If player succeeds, resets local threat. If player fails, game ends.(Unless player has bulletproof vest)
                 case CAFG_events.national_hero:  #
@@ -126,7 +123,7 @@ def eventhandlersub(event_luck):
                     CAFG_events.national_hero.activate()
                     if die:
                         deathhandler()
-                    return
+                    return "WIP"
             # prints special event end bar.
             print(
                 "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
