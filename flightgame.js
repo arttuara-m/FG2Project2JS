@@ -61,17 +61,17 @@ const moveButton = document.createElement('button')
     moveButton.setAttribute('id', 'move')
     moveButton.addEventListener('click',async function() {
         const response = await fetch(`http://127.0.0.1:3000/move`)
-
         const data = await response.json()
-        await fetchAirportsInRange()
         document.querySelector('#buttonrow2').innerHTML = ""
         document.querySelector('#textbox').innerText = data[0]
         if (data.length <= 2){
+            addAirportMarkers(data)
             for (const item of data[1]) {
-                const choicebutton = document.createElement('button');
                 console.log('Airport found: '+item[1])
-                choicebutton.innerText = item[1]
-                choicebutton.setAttribute('id', item[1]);
+                const choicebutton1 = document.createElement('button');
+                choicebutton1.innerText = item[1]
+                choicebutton1.setAttribute('id', item[1]);
+                document.querySelector('#buttonrow2').appendChild(choicebutton1)
             }}
    })
 
