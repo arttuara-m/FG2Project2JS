@@ -14,7 +14,7 @@ body {
 button {
   margin: 5px;
   padding: 5px 10px;
-  background-color: #4caf50; /* Green */
+  background-color: dodgerblue; /* Green */
   color: white;
   border: none;
   border-radius: 5px;
@@ -23,7 +23,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: cornflowerblue;
 }
 
 .maincard {
@@ -32,12 +32,12 @@ button:hover {
   height: 180px;
   top: 50px;
   right: 20px;
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #cccccc;
+  background-color: aliceblue;
 }
 
 .gameCard {
@@ -47,12 +47,12 @@ button:hover {
   overflow-y: auto;
   bottom: 20px;
   left: 20px;
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #cccccc;
+  background-color: aliceblue;
 }
 
 .textBox {
@@ -61,13 +61,13 @@ button:hover {
   max-height: 200px;
   bottom: 20px;
   right: 20px;
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 10px;
   display: flex;
   overflow-y: auto;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #cccccc;
+  background-color: aliceblue;
 }
 
 #main {
