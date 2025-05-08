@@ -39,6 +39,20 @@ body {
   background-color: #cccccc;
 }
 
+.textBox {
+  position: fixed;
+  width: 1100px;
+  height: 200px;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 30px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #cccccc;
+}
+
 #main {
   max-width: 70vw;
   min-width: 70vw;
