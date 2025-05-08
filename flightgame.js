@@ -77,6 +77,16 @@ const moveButton = document.createElement('button')
                 const choicebutton1 = document.createElement('button');
                 choicebutton1.innerText = item[1]
                 choicebutton1.setAttribute('id', item[1]);
+                choicebutton1.addEventListener("click",async function(){
+                    console.log(this.id)
+                    const response2 = await fetch(
+                        `http://127.0.0.1:3000/moveto/${this.id}`,
+                    );
+                    const data2 = await response2.json()
+                    console.log(data2[0])
+                    mapUpdater()
+                    clearMapMarkers()
+                })
                 document.querySelector('#buttonrow2').appendChild(choicebutton1)
             }}
    })

@@ -30,14 +30,18 @@ function updateCoords(latLong){
     map.setView(playerMarker.getLatLng(),map.getZoom());
 }
 
+function clearMapMarkers(){
+    for(let i = 0; i < airportMarkers.length; i++) {
+            console.log("Removing "+newAirport[i])
+            map.removeLayer(airportMarkers[i]);
+        }
+}
+
 function addAirportMarkers(data){
     //first slot is reserved to the message so check if it has brought back other data
     if (data.length <= 2){
         //remove previous map markers
-        for(let i = 0; i < airportMarkers.length; i++) {
-            console.log("Removing "+newAirport[i])
-            map.removeLayer(airportMarkers[i]);
-        }
+        clearMapMarkers()
         //remove the text at start and make a new array from that.
         for (const item of data[1]) {
             airportCoords = [ parseFloat(item[2]) ,parseFloat(item[3]), item[0]+' '+item[1]]
@@ -47,6 +51,7 @@ function addAirportMarkers(data){
             const newAirport = L.marker(airportCoords)
                 .addTo(map).bindPopup(item[0]+' - '+item[1]);
             airportMarkers.push(newAirport);
+
         }}
 }
 //################   vvvvvvv   mitä tekee hän? vvvvv   ################

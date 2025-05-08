@@ -4,7 +4,7 @@ from flask import Flask, request
 
 import EventHandler
 import CAFG_variables as gloVar
-from EventHandler import actioncheck, nearbyairports, updatecoords
+from EventHandler import actioncheck, nearbyairports, updatecoords, flyToAirport
 
 """
 conn = mysql.connector.connect(
@@ -94,11 +94,15 @@ def availableairports():
     return [
         nearby_airports
     ]
-
 @app.route('/move')
 def move():
     airport_buttons = nearbyairports(gloVar.travel_range_km)
     return airport_buttons
+
+@app.route('/moveto/<location>')
+def goToAirport(location):
+    flyToAirport(location)
+    return ["moving to airport:"]
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
