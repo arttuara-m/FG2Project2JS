@@ -1,5 +1,17 @@
 "use strict";
 
+async function timeChecker(){
+    const response = await fetch(`http://127.0.0.1:3000/checkmoves`)
+    //console.log("Checking time...")
+    const data = await response.json()
+    //console.log(data)
+    if (data[0] === false){
+        alert("YOU HAVE RUN OUT OF TIME! TIME TO LEAVE!!")
+    } else if (data[1] <=2){
+        alert("You are soon out of time! Consider leaving soon!")
+    }
+}
+
 async function statupdater() {
   const response = await fetch(`http://127.0.0.1:3000/status`);
   const data = await response.json();
@@ -9,6 +21,7 @@ async function statupdater() {
   document.querySelector("#showairport").innerText = "Airport: " + data[3];
   document.querySelector("#showgthreat").innerText =  "Global threat: " + data[4];
   document.querySelector("#showlthreat").innerText = "Local threat: " + data[5];
+  await timeChecker()
 }
 
 async function turnrefresher() {
@@ -32,7 +45,7 @@ for (const bcommand of commands) {
     const data = await response.json();
     document.querySelector("#textbox").innerText = data[0]; //the text content is in the index 0
     document.querySelector("#buttonrow2").innerHTML = "";
-    statupdater();
+    //statupdater(); en usko et tätä tarvii enää?
 
     if (data.length === 2) {
       //the program checks if additional data was returned

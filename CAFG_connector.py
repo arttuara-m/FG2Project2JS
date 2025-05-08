@@ -67,6 +67,13 @@ def turnupdate():
     EventHandler.shoprandomiser(3)
     return "turn refreshed successfully"
 
+@app.route('/checkmoves')
+def checkmoves():
+    if gloVar.time_units > 0:
+        return [True, gloVar.time_units]
+    else:
+        return [False, gloVar.time_units]
+
 @app.route('/resetgame')
 def resetgame():
     gloVar.current_score = 0
@@ -100,7 +107,7 @@ def move():
     return airport_buttons
 
 @app.route('/moveto/<location>')
-def goToAirport(location):
+def gotoairport(location):
     flyToAirport(location)
     return ["moving to airport:"]
 

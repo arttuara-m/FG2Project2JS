@@ -49,7 +49,8 @@ function addAirportMarkers(data){
                 '\n at coordinates: '+airportCoords)
             //adding markers
             const newAirport = L.marker(airportCoords)
-                .addTo(map).bindPopup(item[0]+' - '+item[1]);
+                .addTo(map).bindPopup(item[0]+' - '+item[1]+' \n '+
+                Math.round(item[4])+'km away.');
             airportMarkers.push(newAirport);
 
         }}

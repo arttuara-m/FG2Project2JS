@@ -553,8 +553,9 @@ def nearbyairports(travel_range):
     nearby_airports = []
     #checks wheter airport is within range, if so, adds it to allAirports list.
     for i in allAirports:
-        if gv.current_airport != i[0] and haversine(current_airport_stats[2],current_airport_stats[3], i[2], i[3]) < gv.travel_range_km:
-            airport_info = [i[0],i[1],i[2],i[3]]
+        distance = haversine(current_airport_stats[2],current_airport_stats[3], i[2], i[3])
+        if gv.current_airport != i[0] and distance < gv.travel_range_km:
+            airport_info = [i[0],i[1],i[2],i[3], distance]
             nearby_airports.append(airport_info)
 
 
