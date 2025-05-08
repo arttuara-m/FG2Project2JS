@@ -83,6 +83,14 @@ const moveButton = document.createElement('button')
                     );
                     const data2 = await response2.json()
                     console.log(data2[0])
+
+                    //Calls the updatable variable updating functions to update all
+                    // the updatable variables sometimes in need of updating
+                    // that currently may be needed to be updated to update
+                    // these updatable variables that are sometimes updated.
+                    //In other words for thee; For all ever so dependable functions which this concerns, the code
+                    // it giveth the upmost urgent order to deliver the latest tidings of the realm
+                    // for the most sovereign of the highly regarded variables that this occurrence may be of concern.
                     clearMapMarkers()
                     turnrefresher()
                     statupdater()
