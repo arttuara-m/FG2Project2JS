@@ -563,6 +563,22 @@ def nearbyairports(travel_range):
             nearby_airports
             ]
 
+def flyToAirport(name):
+    text = str(f'moving to airport: {name}')
+    if not conn.is_connected():
+        conn.reconnect()
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        f"SELECT gps_code FROM airport WHERE name ='{name}'"
+    )
+    target_icao = cursor.fetchall()[0][0]
+    print(f"Target airport icao: {target_icao}")
+    gv.update_current_country(target_icao)
+    print(f'Airport set to {gv.current_airport}')
+
+
 '''
     # Choose destination
     dest_choice = None
