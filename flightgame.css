@@ -11,6 +11,21 @@ body {
   font-family: "Source Code Pro", monospace;
 }
 
+button {
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
 .maincard {
   position: fixed;
   width: 300px;
@@ -27,8 +42,9 @@ body {
 
 .gameCard {
   position: fixed;
-  width: 300px;
-  height: 200px;
+  width: 400px;
+  max-height: 200px;
+  overflow-y: auto;
   bottom: 20px;
   left: 20px;
   border-radius: 30px;
@@ -41,7 +57,7 @@ body {
 
 .textBox {
   position: fixed;
-  width: 1100px;
+  width: 1000px;
   height: 200px;
   bottom: 20px;
   right: 20px;
@@ -81,7 +97,12 @@ li {
 }
 
 #resetbutton {
+  background-color: #e53935;
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+#resetbutton:hover {
+  background-color: #c62828;
 }
