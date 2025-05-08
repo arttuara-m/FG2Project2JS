@@ -1,32 +1,32 @@
 let coords = [0,0]
 
-let map = L.map("map", {
-    zoomControl: false
-}).setView(coords, 13);
+//Add a player marker and create map
+var map = L.map("map", {zoomControl: false}).setView(coords, 13),
+    playerMarker = L.marker(map.getCenter()).addTo(map)
+    .bindPopup("You are currently at: "+coords);
 
 // Add the OpenStreetMap laatta kerros
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 5,
-    minZoom: 5,
+    minZoom: 3,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
-//Add a player marker
-const playerPositionMarker = L.marker(coords)
-    .addTo(map)
-    .bindPopup("You are currently at: "+coords);
 
 async function mapUpdater(){
     const response = await fetch(`http://127.0.0.1:3000/updatemap`);
     const data = await response.json();
     console.log("mapUpdater: new coordinates; "+data)
+    coords[0] = data[0]
+    coords[1] = data[1]
     updateCoords(data[0], data[1])
 }
 
 
-function updateCoords(newcoordsX,newcoordsY){
-    coords[0] = newcoordsX
-    coords[1] = newcoordsY
+function updateCoords(latLong){
+    console.log("Updating player coordinates to "+latLong+"...")
+    playerMarker.setLatLng(latLong);
+    playerMarker._popup.setContent("You are currently at: "+latLong)
+    map.setView(playerMarker.getLatLng(),map.getZoom());
 }
 
 function addAirportMarkers(data){
@@ -36,7 +36,7 @@ function addAirportMarkers(data){
             console.log('addAirportMarker: data recieved for '+item[0]+
                 '\n at coordinates: '+airportCoords)
             const newAirport = L.marker(airportCoords)
-                .addTo(map).bindPopup(item[0]+' '+item[1]);
+                .addTo(map).bindPopup(item[0]+' - '+item[1]);
         }}
 }
 

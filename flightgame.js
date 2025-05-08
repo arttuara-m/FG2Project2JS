@@ -13,8 +13,10 @@ async function statupdater() {
 }
 
 async function turnrefresher() {
-  const response = await fetch(`http://127.0.0.1:3000/turnupdate`);
-  console.log(await response.text());
+    console.log("Updating map...")
+    await mapUpdater();
+    const response = await fetch(`http://127.0.0.1:3000/turnupdate`);
+    console.log(await response.text())
 }
 
 const commands = ["info", "check", "use", "buy", "work"];
@@ -56,28 +58,28 @@ for (const bcommand of commands) {
     }
   });
   //Adding the button to the first buttonrow
-  document.querySelector("#buttonrow1").appendChild(infobutton);
+  document.querySelector('#buttonrow1').appendChild(infobutton);
 }
 
-const moveButton = document.createElement("button");
-moveButton.innerText = "move";
-moveButton.setAttribute("id", "move");
-moveButton.addEventListener("click", async function () {
-  const response = await fetch(`http://127.0.0.1:3000/move`);
-  const data = await response.json();
-  document.querySelector("#buttonrow2").innerHTML = "";
-  document.querySelector("#textbox").innerText = data[0];
-  if (data.length <= 2) {
-    addAirportMarkers(data);
-    for (const item of data[1]) {
-      console.log("Airport found: " + item[1]);
-      const choicebutton1 = document.createElement("button");
-      choicebutton1.innerText = item[1];
-      choicebutton1.setAttribute("id", item[1]);
-      document.querySelector("#buttonrow2").appendChild(choicebutton1);
-    }
-  }
-});
+//Adding a button to move from an airport to another
+const moveButton = document.createElement('button')
+    moveButton.innerText="move"
+    moveButton.setAttribute('id', 'move')
+    moveButton.addEventListener('click',async function() {
+        const response = await fetch(`http://127.0.0.1:3000/move`)
+        const data = await response.json()
+        document.querySelector('#buttonrow2').innerHTML = ""
+        document.querySelector('#textbox').innerText = data[0]
+        if (data.length <= 2){
+            addAirportMarkers(data)
+            for (const item of data[1]) {
+                console.log('Airport found: '+item[1])
+                const choicebutton1 = document.createElement('button');
+                choicebutton1.innerText = item[1]
+                choicebutton1.setAttribute('id', item[1]);
+                document.querySelector('#buttonrow2').appendChild(choicebutton1)
+            }}
+   })
 
 document.querySelector("#buttonrow1").appendChild(moveButton);
 
@@ -93,8 +95,11 @@ resetbutton.addEventListener("click", async function () {
   console.log(await response.text());
   turnrefresher();
   statupdater();
-  location.reload();
-});
+  location.reload()
+  console.log("Updating map...")
+  mapUpdater();
+})
+
 
 turnrefresher();
 statupdater();

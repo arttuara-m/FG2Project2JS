@@ -17,7 +17,7 @@ def mysqlconnector():
         collation="latin1_swedish_ci",
     )
     return conn
-
+conn = mysqlconnector()
 
 
 # handlers that perform the basic functions
@@ -472,7 +472,19 @@ def timeunitrefresher(amount):
 
 
 # handles the movement from country to country
-
+def updatecoords():
+    cursor = conn.cursor()
+    cursor.execute(""
+                   f"SELECT latitude_deg FROM airport WHERE gps_code = '{gv.current_airport}';")
+    player_lat = cursor.fetchall()
+    cursor.execute(""
+                   f"SELECT longitude_deg FROM airport WHERE gps_code = '{gv.current_airport}';")
+    player_long = cursor.fetchall()
+    print(f'{player_lat[0][0]} {player_long[0][0]}')
+    return [player_lat[0][0],
+            player_long[0][0],
+            ]
+    #SELECT longitude_deg FROM airport WHERE gps_code = 'AGGH';
 
 def haversine(lat1, lon1, lat2, lon2):
     #Calculate the great-circle distance between two points using the Haversine formula.
@@ -489,15 +501,7 @@ def haversine(lat1, lon1, lat2, lon2):
 
     return r * c  # Distance in km
 
-
-
-#def movementhandler():
-
-#def movementhandler():
-
-
 def nearbyairports(travel_range):
-    conn = mysqlconnector()
     text=str("Select an airport from the map.")
     if not conn.is_connected():
         conn.reconnect()
@@ -549,7 +553,7 @@ def nearbyairports(travel_range):
     nearby_airports = []
     #checks wheter airport is within range, if so, adds it to allAirports list.
     for i in allAirports:
-        if haversine(current_airport_stats[2],current_airport_stats[3], i[2], i[3]) < gv.travel_range_km:
+        if gv.current_airport != i[0] and haversine(current_airport_stats[2],current_airport_stats[3], i[2], i[3]) < gv.travel_range_km:
             airport_info = [i[0],i[1],i[2],i[3]]
             nearby_airports.append(airport_info)
 

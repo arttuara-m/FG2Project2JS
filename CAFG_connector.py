@@ -4,7 +4,7 @@ from flask import Flask, request
 
 import EventHandler
 import CAFG_variables as gloVar
-from EventHandler import actioncheck, nearbyairports
+from EventHandler import actioncheck, nearbyairports, updatecoords
 
 """
 conn = mysql.connector.connect(
@@ -84,26 +84,9 @@ def resetgame():
 
 @app.route('/updatemap')
 def updatemap():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="surviver",
-        password="123",
-        database="flight_game",
-        charset="latin1",
-        collation="latin1_swedish_ci",
-    )
-
-    if not conn.is_connected():
-        conn.reconnect()
-
-    cursor = conn.cursor()
-    cursor.execute(""
-                   "SELECT latitude_deg FROM airport WHERE gps_code = 'AGGH';")
-    player_y = cursor.fetchall()
-    cursor.execute(""
-                   "SELECT longitude_deg FROM airport WHERE gps_code = 'AGGH';")
-    player_x = cursor.fetchall()
-    return [float(player_x),float(player_y)]
+    current_coordinates = updatecoords()
+    print(f'Fetched latitude and longitude: {current_coordinates[0]} {current_coordinates[1]}')
+    return [current_coordinates]
 
 @app.route('/availableairports')
 def availableairports():
@@ -116,9 +99,6 @@ def availableairports():
 def move():
     airport_buttons = nearbyairports(gloVar.travel_range_km)
     return airport_buttons
-    #for i in airport_buttons[1]:
-    #    print(i[1])
-    #    yield i[1]
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=3000)
