@@ -79,6 +79,8 @@ moveButton.addEventListener("click", async function () {
   }
 });
 
+document.querySelector("#buttonrow1").appendChild(moveButton);
+
 const resetbutton = document.querySelector("#resetbutton");
 
 resetbutton.addEventListener("click", async function () {
