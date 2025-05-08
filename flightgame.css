@@ -1,39 +1,44 @@
 header {
-    max-width: 70vw;
-    min-width: 70vw;
-    margin-left: auto;
-    margin-right: auto;
+  psodition: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 20px;
+  backlight-color: #fff;
+}
+
+body {
+  font-family: "Source Code Pro", monospace;
 }
 
 #main {
-    max-width: 70vw;
-    min-width: 70vw;
-    margin: auto;
+  max-width: 70vw;
+  min-width: 70vw;
+  margin: auto;
 }
 
 #maingroup {
-    display: flex;
+  display: flex;
 }
 
 .buttonrow {
-    padding: 0.5em;
+  padding: 0.5em;
 }
 
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 #map {
-    height: 100vh;
-}
-
-#map {
-    height: 60vh;
-    width: 50vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 
 #resetbutton {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
