@@ -42,7 +42,7 @@ button:hover {
 
 .gameCard {
   position: fixed;
-  width: 30%;
+  max-width: 30%;
   max-height: 200px;
   overflow-y: auto;
   bottom: 20px;
