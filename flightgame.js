@@ -7,8 +7,7 @@ async function statupdater() {
   document.querySelector("#showmoney").innerText = "Money: " + data[1];
   document.querySelector("#showtimeunits").innerText = "Timeunits: " + data[2];
   document.querySelector("#showairport").innerText = "Airport: " + data[3];
-  document.querySelector("#showgthreat").innerText =
-    "Global threat: " + data[4];
+  document.querySelector("#showgthreat").innerText =  "Global threat: " + data[4];
   document.querySelector("#showlthreat").innerText = "Local threat: " + data[5];
 }
 
@@ -84,8 +83,17 @@ const moveButton = document.createElement('button')
                     );
                     const data2 = await response2.json()
                     console.log(data2[0])
-                    mapUpdater()
                     clearMapMarkers()
+                    turnrefresher()
+                    statupdater()
+                    mapUpdater()
+
+                    //delete airport buttons
+                    for (let i in data[1] ){
+                        console.log(data[1][i])
+                        console.log( document.getElementById("buttonrow2").children )
+                        document.getElementById("buttonrow2").innerHTML = '';
+                    }
                 })
                 document.querySelector('#buttonrow2').appendChild(choicebutton1)
             }}
