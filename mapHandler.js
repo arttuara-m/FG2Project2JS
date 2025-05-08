@@ -10,11 +10,10 @@ async function mapUpdater(){
 async function fetchAirportsInRange(){
     const response = await fetch(`http://127.0.0.1:3000/availableairports`)
     const data = await response.json()
-    console.log("fetchAirportsInRange: found;"+data)
-    //for (let i=0;i<data.length;i++){
-        //########## how'd'ya handle jsons with multiple sections again? ########################3
-    //    listOfAirports.push(data.array[i] )
-    //}
+    //if (data.length <= 2){
+    //    for (const item of data[0]) {
+    //        console.log('Airport found: '+item[1])
+    //    }}
 }
 
 function updateCoords(newcoordsX,newcoordsY){

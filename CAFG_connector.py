@@ -105,12 +105,20 @@ def updatemap():
     player_x = cursor.fetchall()
     return [float(player_x),float(player_y)]
 
-@app.route('/move')
+@app.route('/availableairports')
 def availableairports():
     nearby_airports= nearbyairports(gloVar.travel_range_km)
     return [
         nearby_airports
     ]
+
+@app.route('/move')
+def move():
+    airport_buttons = nearbyairports(gloVar.travel_range_km)
+    return airport_buttons
+    #for i in airport_buttons[1]:
+    #    print(i[1])
+    #    yield i[1]
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=3000)

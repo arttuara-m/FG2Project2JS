@@ -16,7 +16,7 @@ async function turnrefresher() {
   console.log(await response.text())
 }
 
-const commands = ['info', 'check', 'use', 'buy', 'work', 'move'];
+const commands = ['info', 'check', 'use', 'buy', 'work'];
 //Creates the first button row
 for (const bcommand of commands) {
 
@@ -26,23 +26,19 @@ for (const bcommand of commands) {
   infobutton.setAttribute('id', bcommand);
 
   //Adding async function to the button
-  infobutton.addEventListener('click', async function() {
+  infobutton.addEventListener('click', async function () {
     const response = await fetch(`http://127.0.0.1:3000/${bcommand}`);
     const data = await response.json();
     document.querySelector('#textbox').innerText = data[0]; //the text content is in the index 0
     document.querySelector('#buttonrow2').innerHTML = ""
     statupdater();
 
-    if (bcommand === "move") {
-            console.log(data[1])
-          }
-
     if (data.length === 2) { //the program checks if additional data was returned
       for (const item of data[1]) {
         const choicebutton = document.createElement('button');
         choicebutton.innerText = item;
         choicebutton.setAttribute('id', item);
-        choicebutton.addEventListener('click', async function(){
+        choicebutton.addEventListener('click', async function () {
           console.log(this.id)
           const response2 = await fetch(`http://127.0.0.1:3000/${bcommand}item/${this.id}`)
           const data2 = await response2.json()
@@ -54,13 +50,33 @@ for (const bcommand of commands) {
         })
         document.querySelector('#buttonrow2').appendChild(choicebutton)
       }
-
-
     }
   });
   //Adding the button to the first buttonrow
   document.querySelector('#buttonrow1').appendChild(infobutton);
 }
+
+const moveButton = document.createElement('button')
+    moveButton.innerText="move"
+    moveButton.setAttribute('id', 'move')
+    moveButton.addEventListener('click',async function() {
+        const response = await fetch(`http://127.0.0.1:3000/move`)
+
+        const data = await response.json()
+        await fetchAirportsInRange()
+        document.querySelector('#buttonrow2').innerHTML = ""
+        document.querySelector('#textbox').innerText = data[0]
+        if (data.length <= 2){
+            for (const item of data[1]) {
+                const choicebutton = document.createElement('button');
+                console.log('Airport found: '+item[1])
+                choicebutton.innerText = item[1]
+                choicebutton.setAttribute('id', item[1]);
+            }}
+   })
+
+
+document.querySelector('#buttonrow1').appendChild(moveButton);
 
 const resetbutton = document.querySelector('#resetbutton')
 resetbutton.addEventListener('click', async function(){
