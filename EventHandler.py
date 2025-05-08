@@ -498,21 +498,20 @@ def haversine(lat1, lon1, lat2, lon2):
 
 def nearbyairports(travel_range):
     conn = mysqlconnector()
+    text=str("Select an airport from the map.")
     if not conn.is_connected():
         conn.reconnect()
 
     cursor = conn.cursor()
-
+    '''
     # Get all airport data including ICAO codes and coordinates
+    
     cursor.execute(
         "SELECT id, gps_code, name, latitude_deg, longitude_deg FROM airport WHERE gps_code IS NOT NULL"
     )
     airports = cursor.fetchall()
-
+    
     # Find the current airport based on gv.current_airport (which is stored as an ICAO code)
-    current_airport = next(
-        (port for port in airports if port[1] == gv.current_airport), None
-    )
 
     if not current_airport:
         text = "Error: Player current_airport could not be found in the database."
@@ -529,20 +528,38 @@ def nearbyairports(travel_range):
         if port[0] != current_airport[0]
         and haversine(current_lat, current_lon, port[3], port[4]) < travel_range
     ]
+    
 
-    if not nearby_airports:
+    if not len(nearby_airports):
         text = "No airports within range. You may need a longer-range aircraft."
-        return [text]
-    return [nearby_airports]
+
+    #print("\nNearby airports within range:")
+    #for port in nearby_airports:
+    #    distance = haversine(current_lat, current_lon, port[3], port[4])
+    #    print(f"{port[0]} ({port[1]}): {port[2]} - {distance:.2f} km away")
+'''
+
+    cursor.execute(
+        "SELECT gps_code, name, latitude_deg, longitude_deg FROM airport WHERE gps_code IS NOT NULL"
+    )
+    allAirports = cursor.fetchall()
+    current_airport_stats = next(
+        (port for port in allAirports if port[0] == gv.current_airport), None
+    )
+    nearby_airports = []
+    #checks wheter airport is within range, if so, adds it to allAirports list.
+    for i in allAirports:
+        if haversine(current_airport_stats[2],current_airport_stats[3], i[2], i[3]) < gv.travel_range_km:
+            airport_info = [i[0],i[1],i[2],i[3]]
+            nearby_airports.append(airport_info)
 
 
-    print("\nNearby airports within range:")
-    for port in nearby_airports:
-        distance = haversine(current_lat, current_lon, port[3], port[4])
-        print(f"{port[0]} ({port[1]}): {port[2]} - {distance:.2f} km away")
+    #if gv.current_airport
+    return [text,
+            nearby_airports
+            ]
 
-
-
+'''
     # Choose destination
     dest_choice = None
     while dest_choice not in [str(port[0]) for port in nearby_airports]:
@@ -608,7 +625,7 @@ def airportandcountryfetch():
     portandcountry = cursor.fetchall()
     print(portandcountry)
 
-
+'''
 def timeunithandler(amount):
     localthreathandler(200, amount)
     gv.time_units -= amount

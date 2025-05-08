@@ -33,6 +33,10 @@ for (const bcommand of commands) {
     document.querySelector('#buttonrow2').innerHTML = ""
     statupdater();
 
+    if (bcommand === "move") {
+            console.log(data[1])
+          }
+
     if (data.length === 2) { //the program checks if additional data was returned
       for (const item of data[1]) {
         const choicebutton = document.createElement('button');
@@ -50,6 +54,8 @@ for (const bcommand of commands) {
         })
         document.querySelector('#buttonrow2').appendChild(choicebutton)
       }
+
+
     }
   });
   //Adding the button to the first buttonrow
