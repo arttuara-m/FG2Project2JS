@@ -9,6 +9,8 @@ player_luck = 0
 player_items = []
 previous_travel_distance = 0
 current_airport = "AGGH"  # change this to the starting current_country
+current_airport_name = ""
+current_country = ""
 local_threat = {current_airport: 0}
 # VV part of the movementhandler placeholder VV
 global_country_index = 0

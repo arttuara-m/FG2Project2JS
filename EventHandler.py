@@ -8,7 +8,7 @@ import math
 from CAFG_variables import shop_items, player_items
 
 def mysqlconnector():
-    conn = mysql.connector.connect(
+    connect = mysql.connector.connect(
         host="localhost",
         user="surviver",
         password="123",
@@ -16,7 +16,7 @@ def mysqlconnector():
         charset="latin1",
         collation="latin1_swedish_ci",
     )
-    return conn
+    return connect
 conn = mysqlconnector()
 
 
@@ -646,6 +646,7 @@ def flyToAirport(name):
     gv.previous_travel_distance = haversine(
         current_lat, current_lon, chosen_airport[3], chosen_airport[4]
     )
+
 def airportandcountryfetch():
     print("works1")
     conn = mysql.connector.connect(
@@ -675,6 +676,15 @@ def timeunithandler(amount):
     if gv.time_units < 0:
         gv.global_threat+=1000
 
+def countryandport():
+    cursor = conn.cursor()
+    cursor.execute(""
+                   f"SELECT name FROM airport WHERE gps_code = '{gv.current_airport}';")
+    airportname = str(cursor.fetchone())
+    gv.current_airport_name = airportname.split("'")[1]
+    #cursor.execute(""
+    #               f"SELECT name FROM country WHERE gps_code = '{gv.current_airport}';")
+    #gv.current_country = cursor.fetchall()
 
 # you are dead
 def deathhandler():

@@ -69,10 +69,12 @@ def status():
     return [str(gloVar.current_score), str(gloVar.player_money),
             str(gloVar.time_units), str(gloVar.current_airport),
             str(gloVar.global_threat),
-            str(gloVar.local_threat[gloVar.current_airport])]
+            str(gloVar.local_threat[gloVar.current_airport]),
+            str(gloVar.current_airport_name), str(gloVar.current_country)]
 
 @app.route('/turnupdate')
 def turnupdate():
+    EventHandler.countryandport()
     EventHandler.timeunitrefresher(10)
     EventHandler.shoprandomiser(3)
     return "turn refreshed successfully"
@@ -86,6 +88,7 @@ def checkmoves():
 
 @app.route('/resetgame')
 def resetgame():
+    EventHandler.countryandport()
     gloVar.current_score = 0
     gloVar.global_threat = 0
     gloVar.shop_items = []
